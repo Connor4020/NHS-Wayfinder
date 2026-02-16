@@ -2,7 +2,7 @@
   <div>
     <h1>Users</h1>
     <div v-if="error">Error loading users.</div>
-    <div v-else-if="pending">Loading…</div>
+    <div v-else-if="pending">Loading...</div>
     <div v-else>
       <table v-if="users && users.length">
         <thead>
