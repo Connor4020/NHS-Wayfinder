@@ -1,7 +1,19 @@
 <script>
 
+import useAuth from '../../server/api/use-auth'
+
+const username = ''
+const password = ''
 
 
+const submit = async () => {
+  try {
+    await useAuth().login(username, password)
+    
+  } catch (e) {
+    // show error message
+  }
+}
 </script>
 
 
