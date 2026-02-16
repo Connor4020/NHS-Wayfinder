@@ -1,3 +1,10 @@
+<script>
+
+
+
+</script>
+
+
 <template>
   <div>
     <h2>Welcome to Wayfinder</h2>
@@ -7,6 +14,7 @@
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
       <NuxtLink to="/add-user">Add User</NuxtLink>
     </p>
+    <NuxtLink to="/login">login</NuxtLink>
   </div>
 
   <div>
