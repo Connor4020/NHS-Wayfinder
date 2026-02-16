@@ -99,3 +99,20 @@ input:focus {
 .btn-submit:hover {
     background-color: #0056b3;
 }
+@media only screen and (max-width: 600px) {
+
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: #005EB8;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
