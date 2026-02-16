@@ -10,7 +10,8 @@
     </p>
   </div>
 
-  <div>        <NuxtLink to="/admin/create-route">Create Route</NuxtLink>
+  <div>
+        <NuxtLink to="/admin/create-route">Create Route</NuxtLink>
         <NuxtLink to="/admin/create-routemap">Create Route Map</NuxtLink>
         <NuxtLink to="/admin/edit-routemap">Edit Route Map</NuxtLink>
         <NuxtLink to="/admin/list-locations">List Locations</NuxtLink>
