@@ -6,7 +6,16 @@
       <NuxtLink to="/show-users">View Users</NuxtLink>
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
       <NuxtLink to="/add-user">Add User</NuxtLink>
-      <NuxtLink to="/admin/admin-pages">Admin Pages</NuxtLink>
+
     </p>
   </div>
+
+  <div>        <NuxtLink to="/admin/create-route">Create Route</NuxtLink>
+        <NuxtLink to="/admin/create-routemap">Create Route Map</NuxtLink>
+        <NuxtLink to="/admin/edit-routemap">Edit Route Map</NuxtLink>
+        <NuxtLink to="/admin/list-locations">List Locations</NuxtLink>
+        <NuxtLink to="/admin/list-media">List Media</NuxtLink>
+        <NuxtLink to="/admin/list-routesadmin">List routesadmin</NuxtLink>
+        <NuxtLink to="/admin/qr-code">List Users</NuxtLink>
+        <NuxtLink to="/admin/review-media">Review Media</NuxtLink></div>
 </template>
