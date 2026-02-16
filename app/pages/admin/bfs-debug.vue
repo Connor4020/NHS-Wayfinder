@@ -35,7 +35,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { graph, bfsShortestPath } from "@/../util/bfs.js";
+=======
+import { graph, bfsShortestPath } from "@/../util/bfs";
+>>>>>>> 8ffd0ec1245893fb3e8c9f434bbeadcea6695cdd
 
 export default {
   data() {
