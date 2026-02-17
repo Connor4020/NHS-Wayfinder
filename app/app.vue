@@ -15,6 +15,7 @@ onMounted(async () => {
 })
 
 console.log('Current user:', user.value)
+
 </script>
 
 <template>
