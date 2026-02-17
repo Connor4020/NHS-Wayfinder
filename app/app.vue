@@ -14,6 +14,8 @@ onMounted(async () => {
   }
 })
 
+
+
 console.log('Current user:', user.value)
 
 </script>
@@ -23,6 +25,6 @@ console.log('Current user:', user.value)
 
   <h1 v-if="user">welcome {{ user.username }}</h1>
   <h1 v-else>welcome Guest</h1>
-
+  
   <NuxtPage />
 </template>
