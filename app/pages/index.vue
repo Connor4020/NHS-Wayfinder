@@ -1,15 +1,13 @@
 <script>
-import { user } from '~~/server/api/use-auth';
+import { user } from "~~/server/api/use-auth";
 import Header from "../components/header.vue";
 
 export default {
   components: {
-    Header
-  }
+    Header,
+  },
 };
-
 </script>
-
 
 <template>
   <Header />
@@ -20,7 +18,6 @@ export default {
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
       <NuxtLink to="/add-user">Add User</NuxtLink>
     </p>
-
   </div>
 
   <div>
