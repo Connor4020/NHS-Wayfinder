@@ -11,9 +11,9 @@ export default {
 </script>
 
 <template>
-  <Header />
+  <Header/>
   <div>
-    <h1>Welcome to NHS Wayfinder</h1>
+    <h1>Welcome to Wayfinder</h1>
     <p>
       <NuxtLink to="/show-users">View Users</NuxtLink>
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
@@ -30,6 +30,6 @@ export default {
     <NuxtLink to="/admin/list-routesadmin">List routesadmin</NuxtLink>
     <NuxtLink to="/admin/qr-code">QR code</NuxtLink>
     <NuxtLink to="/admin/review-media">Review Media</NuxtLink>
-    <NuxtLink to="/admin/bfs-debug">Bfs Debug</NuxtLink>
+    <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
   </div>
 </template>

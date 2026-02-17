@@ -60,7 +60,7 @@ useHead({
 
 <template>
   <div>
-    <h1>Users</h1>
+    <h1>User management</h1>
     <div v-if="error2">Error loading users.</div>
     <div v-else-if="pending2">Loading…</div>
     <div v-else>
