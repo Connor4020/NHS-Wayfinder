@@ -2,7 +2,7 @@
     <header class="header">
         <div id="Topbar">
             <div class="logo">
-                <h1>NHS</h1>
+                <h1>PATHFINDER</h1>
             </div>
             <div class="account">
                 <NuxtLink v-if="!user" to="/login">Login</NuxtLink>
