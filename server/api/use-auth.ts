@@ -44,3 +44,18 @@ export function useAuth() {
 }
 
 export default useAuth
+
+
+// USAGE:
+// In a component, import and call fetchUserData() to load user data on mount, and use the user ref to access it:
+/*
+<script setup>
+import { onMounted } from 'vue'
+import { useAuth } from '../api/use-auth'
+const { user, loading, error, fetchUserData } = useAuth()
+
+onMounted(() => {
+  fetchUserData()
+})
+</script>
+*/
