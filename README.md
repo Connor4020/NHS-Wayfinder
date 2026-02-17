@@ -73,3 +73,14 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Environment Variables
+
+Configure a database connection via a `.env` file (loaded by Nitro on the server-side). Copy `.env.example` to `.env` and set:
+
+- `DB_HOST`: MySQL host
+- `DB_USER`: MySQL username
+- `DB_PASS`: MySQL password
+- `DB_NAME`: Database name
+
+A connection pool is created in `api/database.ts` and used by server API handlers (e.g. `server/api/users.get.ts`). Keep credentials only in `.env`; avoid hard-coded defaults.

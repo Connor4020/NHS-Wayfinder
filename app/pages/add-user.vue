@@ -1,15 +1,19 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue'
 const { data: cols, pending: columnsPending, error } = await useFetch('/api/users/columns')
-const columns = computed(() => cols?.value ?? [])
+const columns = computed(() => {
+  const raw = cols?.value
+  return Array.isArray(raw) ? raw.filter(c => c && typeof c.name === 'string') : []
+})
+const formColumns = computed(() =>
+  columns.value.filter(c => ['username', 'password_hash'].includes(c.name))
+)
 const form = reactive({})
 const message = ref('')
 
 watch(columns, (newCols) => {
   newCols.forEach(c => {
-     {
-      form[c.name] = ''
-    }
+    form[c.name] = ''
   })
 }, { immediate: true })
 
@@ -26,6 +30,12 @@ async function submit() {
 
 const { data: users2, pending2, error2 } = await useFetch('/api/users')
 const columns2 = computed(() => (users2?.value?.length ? Object.keys(users2.value[0]) : []))
+
+useHead({
+  link: [
+    { rel: 'stylesheet', href: '/css/style.css' }
+  ]
+})
 </script>
 
 
@@ -38,7 +48,7 @@ const columns2 = computed(() => (users2?.value?.length ? Object.keys(users2.valu
     <div v-if="error2">Error loading users.</div>
     <div v-else-if="pending2">Loading…</div>
     <div v-else>
-      <table v-if="users2 && users2.length">
+      <table v-if="users2 && users2.length" class="styled-table">
         <thead>
           <tr>
             <th v-for="col in columns2" :key="col">{{ col }}</th>
@@ -57,22 +67,20 @@ const columns2 = computed(() => (users2?.value?.length ? Object.keys(users2.valu
   <div>
     <h1>Add User</h1>
     <div v-if="columnsPending">Loading form…</div>
-    <div v-else>
+    <div v-else class="form-container">
       <form @submit.prevent="submit">
 
         <div>
             <p>Note: Only username and password are required. Other fields will be ignored.</p>
         </div>
-        
-        <div v-for="col in columns" :key="col.name">
-          <label :for="col.name">{{ col.name }}</label>
-          <input
-            :id="col.name"
-            v-model="form[col.name]"
-            :type="col.type && col.type.toLowerCase().includes('int') ? 'number' : 'text'"
-          />
+
+        <!-- just for username and password dont do other collums username and password_hash-->
+        <div v-for="col in formColumns" :key="col.name" class="form-group">
+          <label :for="col.name">{{ col.name === 'password_hash' ? 'password' : col.name }}</label>
+          <input :id="col.name" v-model="form[col.name]" :type="col.name === 'password_hash' ? 'password' : 'text'" required />
         </div>
-        <button type="submit">Add User</button>
+
+        <button type="submit" class="btn-submit">Add User</button>
       </form>
       <div v-if="message">{{ message }}</div>
     </div>

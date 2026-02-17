@@ -23,15 +23,11 @@ export default defineEventHandler(async (event) => {
     const uid = payload?.uid
     if (!uid) return { user: null }
 
-    
+    // push to database
 
-    const row: any = await new Promise((resolve, reject) => {
-      pool.get('SELECT User_ID, First_Name, Last_Name, Email, Phone, Role FROM User WHERE User_ID = ?', [uid], (err, row) => {
-        pool.close()
-        if (err) return reject(err)
-        resolve(row)
-      })
-    })
+    const [rows]: any = await pool.query('SELECT * FROM navigation_system.users WHERE username = ?', [uid])
+    const row = rows?.[0]
+    
 
     if (!row) return { user: null }
     return { user: row }

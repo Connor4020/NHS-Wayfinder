@@ -1,20 +1,26 @@
 <script>
+import { user } from '~~/server/api/use-auth';
+import Header from "../components/header.vue";
 
-
+export default {
+  components: {
+    Header
+  }
+};
 
 </script>
 
 
 <template>
+  <Header />
   <div>
-    <h2>Welcome to Wayfinder</h2>
     <h1>Welcome to NHS Wayfinder</h1>
     <p>
       <NuxtLink to="/show-users">View Users</NuxtLink>
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
       <NuxtLink to="/add-user">Add User</NuxtLink>
     </p>
-    <NuxtLink to="/login">login</NuxtLink>
+
   </div>
 
   <div>
