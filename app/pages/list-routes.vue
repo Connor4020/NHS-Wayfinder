@@ -11,7 +11,7 @@ console.log('Path data:', path.value)
 
 <template>
     <div>
-        <h1>Welcome to NHS Wayfinder</h1>
+        <h1>Welcome to Wayfinder</h1>
         <p>Path data: {{ path }}</p>
     </div>
 </template>
