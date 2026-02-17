@@ -30,6 +30,6 @@ export default {
     <NuxtLink to="/admin/list-routesadmin">List routesadmin</NuxtLink>
     <NuxtLink to="/admin/qr-code">QR code</NuxtLink>
     <NuxtLink to="/admin/review-media">Review Media</NuxtLink>
-    <NuxtLink to="/admin/bfs-debug">Bfs Debug</NuxtLink>
+    <NuxtLink to="/admin/bfs-debug">BfS Debug</NuxtLink>
   </div>
 </template>
