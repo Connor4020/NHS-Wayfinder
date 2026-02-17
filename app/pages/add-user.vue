@@ -1,5 +1,21 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue'
+
+const { data: media, pending, refresh } = await useFetch('./api/user')
+
+
+async function deleteUser(username) {
+  if (!confirm('Delete this user?')) return
+  try {
+    await $fetch('/api/users', { method: 'DELETE', body: { username } })
+    await refresh()
+  } catch (err) {
+    console.error(err)
+    alert('Failed to delete user')
+  }
+}
+
+
 const { data: cols, pending: columnsPending, error } = await useFetch('/api/users/columns')
 const columns = computed(() => {
   const raw = cols?.value
@@ -57,6 +73,7 @@ useHead({
         <tbody>
           <tr v-for="(user, idx) in users2" :key="idx">
             <td v-for="col in columns2" :key="col">{{ user[col] }}</td>
+            <td><button @click="deleteUser(user.username)" class="btn-delete">Delete</button></td>
           </tr>
         </tbody>
       </table>
