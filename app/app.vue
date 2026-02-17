@@ -22,13 +22,9 @@ async function handleLogout() {
     await logout();
   } catch (_) {}
 
-  try {
-    const visor = document.getElementById("hamburgerLinksVisor");
-    if (visor) visor.style.display = "none";
-  } catch (_) {}
 
   logoutMessage.value = user.value
-    ? `Goodbye ${user.value.First_Name}! You have been logged out.`
+    ? `Goodbye ${user.value.username}! You have been logged out.`
     : "Logout successful.";
   showLogoutSuccess.value = true;
 
@@ -50,7 +46,6 @@ console.log('Current user:', user.value)
 </script>
 
 <template>
-  <h3>Welcome to NHS Wayfinder</h3>
   <NuxtLink v-if="!user" to="/login">login</NuxtLink>
           <NuxtLink v-if="user" to="#" @click.prevent="handleLogout">
             Logout
