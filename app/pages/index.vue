@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <Header />
+  <Header/>
   <div>
     <h1>Welcome to NHS Wayfinder</h1>
     <p>
