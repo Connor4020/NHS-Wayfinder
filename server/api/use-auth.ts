@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
 
-export const user = ref<any | null>(null)
+export const user = ref<{ username: string } | null>(null)
 export const loading = ref(false)
 export const error = ref<string | null>(null)
 
@@ -16,7 +16,8 @@ export async function fetchUserData() {
       return null
     }
     const data = await res.json()
-    user.value = data?.user ?? null
+    const u = data?.user ?? null
+    user.value = u ? { username: u.username } : null
     return user.value
   } catch (err) {
     user.value = null

@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
     // push to database
 
-    const [rows]: any = await pool.query('SELECT * FROM navigation_system.users WHERE User_ID = ? OR username = ?', [uid, uid])
+    const [rows]: any = await pool.query('SELECT * FROM navigation_system.users WHERE username = ?', [uid])
     const row = rows?.[0]
     
 

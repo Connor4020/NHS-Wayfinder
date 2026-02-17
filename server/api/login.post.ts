@@ -10,9 +10,9 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event) || {}
   // accept common password field names (case-insensitive)
   const { username } = body
-  const password_hash = body.password ?? body.Password ?? body.password_hash ?? body.Password_hash
+  const password = body.password ?? body.Password ?? body.password_hash ?? body.Password_hash
 
-  if (!username || !password_hash) {
+  if (!username || !password) {
     throw createError({ statusCode: 400, statusMessage: 'username and password are required' })
   }
 
@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
     setCookie(event, 'auth', token, {
       httpOnly: true,
       sameSite: 'lax',
-      path: '/',
+      path: '/index.vue',
       maxAge: JWT_EXPIRES_IN_SECONDS,
       secure: process.env.NODE_ENV === 'production'
     })
