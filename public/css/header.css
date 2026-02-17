@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+.header{
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#Topbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #005EB8;
+    height: 100px;
+    width: auto;
+    margin: 0 0;
+    padding: 0 20%;
+}
+
+.account a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #fff;
+}
+
+.account a:hover {
+    text-decoration: underline;
+}
+
+#Morebtn{
+    display: none;
+}
+
+nav {
+    height: 50px;
+    display: flex;
+    position: relative;
+    z-index: 10;
+    background-color: #005EB8;
+    align-items: center;
+    font-weight: normal;
+    margin: 0 0;
+    padding: 0 20%;
+}
+
+nav ul {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid #c0c0c0;
+    justify-content: space-between;
+    list-style: none;
+    font-weight: bolder;
+    margin: 0;
+    padding: 0 30px;
+}
+
+nav ul li {
+    cursor: pointer;
+    padding: 10px 0;
+    font-weight: bolder;
+    font-size: 24px;
+
+}
+
+nav ul li a {
+    color: #000;
+    font-size: 20px;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.dropdown {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    #Topbar {
+        padding: 0 5%;
+        box-shadow: 0px 20px 80px -15px grey;
+    }
+
+    #account {
+        display: none;
+    }
+
+    #Morebtn {
+        display: block;
+    }
+
+    nav {
+        padding: 0 5%;
+        box-shadow: 0px 20px 80px -15px grey;
+    }
+
+    #link2, #link3 {
+        display: none;
+    }
+
+    .dropdown {
+        display: block;
+        position: absolute;
+        top: 150px;
+        right: 0;
+        background-color: #e0e0e0;
+        width: 100%;
+        height: auto;
+        text-align: left;
+    }
+    
+    .dropdown ul{
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: #005EB8;
+        text-decoration: none;
+    }
+
+    .dropdown ul li {
+        display: block;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: bolder;
+        color: #005EB8;
+        text-decoration: none;
+    }
+
+    .dropdown ul li a {
+        display: block;
+        color: #005EB8;
+        font-size: 18px;
+        font-weight: bolder;
+        text-decoration: none;
+    }
+
+    .dropdown ul li a:hover {
+        color: #000000;
+        text-decoration: underline;
+    }
+    
+    .dropdown ul li:hover {
+        background-color: #fffb00;
+    }
+
+}

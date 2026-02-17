@@ -1,11 +1,17 @@
 <script>
+import Header from "../components/header.vue";
 
-
+export default {
+  components: {
+    Header
+  }
+};
 
 </script>
 
 
 <template>
+  <Header />
   <div>
     <h2>Welcome to Wayfinder</h2>
     <h1>Welcome to NHS Wayfinder</h1>
