@@ -32,6 +32,13 @@
 
     <div v-else-if="searched" style="color: red">No valid path found.</div>
   </div>
+  <div>
+    <hr />
+    <p>
+      Here is where you will be able to create some nodes for debugging
+      purposes.
+    </p>
+  </div>
 </template>
 
 <script>
