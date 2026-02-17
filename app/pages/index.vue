@@ -20,7 +20,7 @@ export default {
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
       <NuxtLink to="/add-user">Add User</NuxtLink>
     </p>
-    <NuxtLink v-if="!user" to="/login">login</NuxtLink>
+
   </div>
 
   <div>
