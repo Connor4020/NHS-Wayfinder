@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
     setCookie(event, 'auth', token, {
       httpOnly: true,
       sameSite: 'lax',
-      path: '/index.vue',
+      path: '/',
       maxAge: JWT_EXPIRES_IN_SECONDS,
       secure: process.env.NODE_ENV === 'production'
     })
