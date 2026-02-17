@@ -1,26 +1,24 @@
 <script>
-import { user } from '~~/server/api/use-auth';
+import { user } from "~~/server/api/use-auth";
 import Header from "../components/header.vue";
 
 export default {
   components: {
-    Header
-  }
+    Header,
+  },
 };
 
 </script>
 
-
 <template>
-  <Header />
+  <Header/>
   <div>
-    <h1>Welcome to NHS Wayfinder</h1>
+    <h1>Welcome to Wayfinder</h1>
     <p>
       <NuxtLink to="/show-users">View Users</NuxtLink>
       <NuxtLink to="/list-routes">View Routes</NuxtLink>
       <NuxtLink to="/add-user">Add User</NuxtLink>
     </p>
-
   </div>
 
   <div>
@@ -30,8 +28,8 @@ export default {
     <NuxtLink to="/admin/list-locations">List Locations</NuxtLink>
     <NuxtLink to="/admin/list-media">List Media</NuxtLink>
     <NuxtLink to="/admin/list-routesadmin">List routesadmin</NuxtLink>
-    <NuxtLink to="/admin/qr-code">List Users</NuxtLink>
+    <NuxtLink to="/admin/qr-code">QR code</NuxtLink>
     <NuxtLink to="/admin/review-media">Review Media</NuxtLink>
-    <NuxtLink to="/admin/bfs-debug">Bfs Debug</NuxtLink>
+    <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
   </div>
 </template>

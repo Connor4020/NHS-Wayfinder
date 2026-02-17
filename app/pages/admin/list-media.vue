@@ -4,6 +4,11 @@ import { computed } from 'vue'
 const { data: media, pending, error } = await useFetch('/api/media')
 const columns = computed(() => (media?.value?.length ? Object.keys(media.value[0]) : []))
 
+
+// Debugging logs media data and first media URL
+//console.log('Media data:', media.value)
+//console.log(media.value[0].media_url)
+
 </script>
 
 
@@ -32,6 +37,7 @@ const columns = computed(() => (media?.value?.length ? Object.keys(media.value[0
         <tbody>
           <tr v-for="(mediaItem, idx) in media" :key="idx">
             <td v-for="col in columns" :key="col"><a :href="mediaItem[col]">{{ mediaItem[col] }}</a></td>
+            <img v-if="mediaItem" :src="mediaItem.media_url" alt="Media Image"/>
           </tr>
         </tbody>
       </table>

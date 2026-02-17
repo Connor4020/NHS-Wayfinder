@@ -2,11 +2,10 @@
     <header class="header">
         <div id="Topbar">
             <div class="logo">
-                <h1>NHS</h1>
+              <img src="/resources/nhs_logo.jpg" alt="NHS Wayfinder Logo">
             </div>
             <div class="account">
                 <NuxtLink v-if="!user" to="/login">Login</NuxtLink>
-
             </div>
         </div>    
         <nav class="navbar">
@@ -34,10 +33,10 @@
 import '../public/css/header.css';
 
 export default {
-  name: 'AppHeader', // Multi-word name
+  name: 'AppHeader',
   data() {
     return {
-      isDropdownOpen: false // Reactive state for the dropdown
+      isDropdownOpen: false
     };
   },
   methods: {
@@ -46,4 +45,29 @@ export default {
     }
   }
 };
+
+
+
+async function handleLogout() {
+  try {
+    await logout();
+  } catch (_) {}
+
+
+  logoutMessage.value = user.value
+    ? `Goodbye ${user.value.username}! You have been logged out.`
+    : "Logout successful.";
+  showLogoutSuccess.value = true;
+
+  setTimeout(() => {
+    showLogoutSuccess.value = false;
+    try {
+      router.push("/");
+    } catch (_) {}
+  }, 2000);
+}
+
+const showLogoutSuccess = ref(false);
+const logoutMessage = ref("");
+
 </script>

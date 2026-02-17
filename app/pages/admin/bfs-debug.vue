@@ -65,8 +65,8 @@ export default {
     runBFS() {
       this.shortestPath = bfsShortestPath(
         graph,
-        this.startNode.trim(),
-        this.targetNode.trim(),
+        this.startNode.trim().toLocaleUpperCase(),
+        this.targetNode.trim().toLocaleUpperCase(),
         this.wheelchairMode,
       );
 

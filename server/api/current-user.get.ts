@@ -35,3 +35,8 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: String(err?.message || err) })
   }
 })
+
+
+// USAGE: 
+// const { user } = await $fetch('/api/current-user')
+// user will be null if not authenticated, or an object with user data if authenticated.

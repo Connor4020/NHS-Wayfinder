@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>Welcome to NHS Wayfinder</h1>
+        <h1>create routes pages</h1>
     </div>
 </template>
