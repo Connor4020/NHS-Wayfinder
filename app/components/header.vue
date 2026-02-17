@@ -46,4 +46,29 @@ export default {
     }
   }
 };
+
+
+
+async function handleLogout() {
+  try {
+    await logout();
+  } catch (_) {}
+
+
+  logoutMessage.value = user.value
+    ? `Goodbye ${user.value.username}! You have been logged out.`
+    : "Logout successful.";
+  showLogoutSuccess.value = true;
+
+  setTimeout(() => {
+    showLogoutSuccess.value = false;
+    try {
+      router.push("/");
+    } catch (_) {}
+  }, 2000);
+}
+
+const showLogoutSuccess = ref(false);
+const logoutMessage = ref("");
+
 </script>
