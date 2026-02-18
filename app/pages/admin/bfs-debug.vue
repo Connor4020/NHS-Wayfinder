@@ -39,11 +39,13 @@
 </template>
 
 <script>
-import { graph, bfsShortestPath } from "@/../util/bfs";
+import { bfsShortestPath } from "@/../util/bfs";
+import { createGraph } from "@/../util/graph";
 
 export default {
   data() {
     return {
+      graph: createGraph(),
       startNode: "",
       targetNode: "",
       wheelchairMode: false,
@@ -54,14 +56,14 @@ export default {
 
   computed: {
     formattedGraph() {
-      return JSON.stringify(graph, null, 2);
+      return JSON.stringify(createGraph(), null, 2);
     },
   },
 
   methods: {
     runBFS() {
       this.shortestPath = bfsShortestPath(
-        graph,
+        this.graph,
         this.startNode.trim().toLocaleUpperCase(),
         this.targetNode.trim().toLocaleUpperCase(),
         this.wheelchairMode,
