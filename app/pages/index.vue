@@ -18,17 +18,27 @@ export default {
 </script>
 
 <template>
-  <Header/>
-<div class="background-image">
-  <div class="box-container">
-    <h1 class="welcome-message">NHS</h1>
-    <h1 class="welcome-message">Pathfinder</h1>
-    <p class="hospital-name">Northern General Hospital</p>
+    <Header/>
+  <div class="background-image">
+    <div class="box-container">
+      <h1 class="welcome-message">NHS</h1>
+      <h1 class="welcome-message">Pathfinder</h1>
+      <p class="hospital-name">Northern General Hospital</p>
+    </div>
+    <div class="box-container-center">
+      <div class="location-text">
+        <h2>Find your path:</h2>
+        <p>Enter your start location</p>
+      </div>
+    <input type="text" placeholder="Enter your current location">
+    <div class="location-text">
+        <p>Enter your destination</p>
+      </div>
+      <input type="text" placeholder="Enter your destination">
+      <a href="#" class="button">Start Pathway</a>
+    </div>
   </div>
-  <div class="box-container">
-    <h1 class="">Find your location</h1>
-    <p class="hospital-name">Northern General Hospital</p>
-      <div>
+  <div>
     <h1>Welcome to Wayfinder</h1>
     <p>
       <NuxtLink to="/show-users">View Users</NuxtLink>
@@ -47,7 +57,4 @@ export default {
     <NuxtLink to="/admin/add-node">Add Node</NuxtLink>
     <NuxtLink to="/admin/assign-media">Assign Media</NuxtLink>
   </div>
-  </div>
-</div>
-
 </template>
