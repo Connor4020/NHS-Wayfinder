@@ -101,29 +101,106 @@ input:focus {
 }
 
 .background-image {
-    background-image: url('../resources/Main_image_twilight.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    min-height: 50vh;
+    position: relative;
+    z-index: 0;
+    min-height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center; 
     padding: 40px 20px;
 
-    flex-direction: column;      
+    flex-direction: column;
+    gap: 30px;      
+}
+
+.background-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    background-image: url('../resources/Main_image_twilight.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
 .box-container{
     background-color: #005EB8;
-    height: 40%;
-    width:50%;
+    height: auto;
+    width:40%;
+    width: min(560px, 85%);
     margin: auto;
     justify-content: center;
     align-items: center;
-    padding: 30px;
-    margin-top: 100px;
+    padding: 22px 26px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.box-container-center {
+    background-color: #005EB8;
+    width: min(560px, 85%);
+    margin: 16px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 26px;
+    box-sizing: border-box;
+}
+
+.location-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.box-container-center h2 {
+    color: #ffffff;
+    margin: 0;
+    line-height: 1;
+    font-size: 40px;
+    margin: 10px;
+}
+
+.box-container-center p {
+    color: #ffffff;
+    margin: 2px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.box-container-center input {
+    width: 100%;
+    max-width: 420px;
+    height: 44px;
+    border-radius: 0;
+    box-sizing: border-box;
+}
+
+.box-container-center .button {
+    width: 100%;
+    max-width: 420px;
+    height: 44px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007f3f;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.box-container-center .button:hover {
+    background-color: #006b36;
 }
 
 .container {
@@ -145,7 +222,6 @@ input:focus {
     margin: 0;
     font-style: italic;
 }
-
 @media only screen and (max-width: 600px) {
 
 }

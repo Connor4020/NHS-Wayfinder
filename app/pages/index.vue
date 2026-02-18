@@ -25,9 +25,17 @@ export default {
     <h1 class="welcome-message">Pathfinder</h1>
     <p class="hospital-name">Northern General Hospital</p>
   </div>
-  <div class="box-container">
-    <h1 class="">Find your location</h1>
-    <p class="hospital-name">Northern General Hospital</p>
+  <div class="box-container-center">
+    <div class="location-text">
+      <h2>Find your path:</h2>
+      <p>Enter your start location</p>
+    </div>
+  <input type="text" placeholder="Enter your current location">
+  <div class="location-text">
+      <p>Enter your destination</p>
+    </div>
+    <input type="text" placeholder="Enter your destination">
+    <a href="#" class="button">Start Pathway</a>
   </div>
 </div>
   <div>
