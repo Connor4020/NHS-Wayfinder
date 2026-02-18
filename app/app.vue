@@ -49,9 +49,6 @@ console.log('Current user:', user.value)
           <NuxtLink v-if="user" to="#" @click.prevent="handleLogout">
             Logout
           </NuxtLink>
-
-  <h1 v-if="user">welcome {{ user.username }}</h1>
-  <h1 v-else>welcome Guest</h1>
   
   <NuxtPage />
 </template>
