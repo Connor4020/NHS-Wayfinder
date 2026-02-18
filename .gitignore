@@ -22,3 +22,7 @@ logs
 .env
 .env.*
 !.env.example
+
+# media uploads folder
+public/media
+
