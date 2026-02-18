@@ -5,6 +5,18 @@ const { data: nodes, pending: nodesPending, error: nodesError } = await useFetch
 
 import { computed } from 'vue'
 
+const isImage = (t) => {
+    if (t == null) return false
+    const s = String(t).toLowerCase()
+    return s.startsWith('image') || s === '2' || s === 'image/png' || s === 'image/jpg' || s === 'image/jpeg'
+}
+
+const isVideo = (t) => {
+    if (t == null) return false
+    const s = String(t).toLowerCase()
+    return s.startsWith('video') || s === '1' || s === 'video/mp4'
+}
+
 const nodesMap = computed(() => {
     const map = {}
     const list = (nodes && nodes.value) || []
@@ -28,7 +40,9 @@ console.log('connections data:', connections.value)
             <ul v-if="connections">
             <li v-for="c in connections" :key="`${c.node_1}-${c.node_2}`">
             <div>
-                <strong>{{ nodesMap[c.node_1] || c.node_1 }} → {{ nodesMap[c.node_2] || c.node_2 }}</strong>
+                <NuxtLink :to="{ path: '/watch-route', query: { node_1: c.node_1, node_2: c.node_2 } }">
+                    <strong>{{ nodesMap[c.node_1] || c.node_1 }} → {{ nodesMap[c.node_2] || c.node_2 }}</strong>
+                </NuxtLink>
                 <span v-if="c.wheelchair_accessible"> • wheelchair accessible</span>
                 <span v-if="c.uses_lift"> • lift</span>
                 <span v-if="c.uses_stairs"> • stairs</span>
@@ -38,10 +52,10 @@ console.log('connections data:', connections.value)
                     <ul>
                     <li v-for="m in c.media" :key="m.media_id + '-' + m.order_num">
                     <div>
-                        <span v-if="m.media_type && m.media_type.startsWith('image')">
+                        <span v-if="isImage(m.media_type)">
                             <img :src="m.media_url" alt="media" style="max-width:120px; max-height:80px" />
                         </span>
-                        <span v-else-if="m.media_type && m.media_type.startsWith('video')">
+                        <span v-else-if="isVideo(m.media_type)">
                             <video :src="m.media_url" controls style="max-width:160px; max-height:90px"></video>
                         </span>
                         <span v-else>
