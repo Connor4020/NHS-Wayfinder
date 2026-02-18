@@ -7,15 +7,6 @@ export const graph = {
   F: { neighbors: [], accessible: true },
 };
 
-/**
- * @param {Object} graph
- * @param {String} start
- * @param {String} target
- * @param {Boolean} wheelchairMode,
- * @param {Boolean} usesLift,
- * @param {Boolean} usesStairs,
- */
-
 
 // Main function.
 export function bfsShortestPath(graph, start, target, wheelchairMode) {
