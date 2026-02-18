@@ -28,9 +28,7 @@ export default {
   <div class="box-container">
     <h1 class="">Find your location</h1>
     <p class="hospital-name">Northern General Hospital</p>
-  </div>
-</div>
-  <div>
+      <div>
     <h1>Welcome to Wayfinder</h1>
     <p>
       <NuxtLink to="/show-users">View Users</NuxtLink>
@@ -49,4 +47,7 @@ export default {
     <NuxtLink to="/admin/add-node">Add Node</NuxtLink>
     <NuxtLink to="/admin/assign-media">Assign Media</NuxtLink>
   </div>
+  </div>
+</div>
+
 </template>
