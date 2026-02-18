@@ -12,6 +12,10 @@ const order_num = ref('')
 const message = ref('')
 const loading = ref(false)
 
+const uses_lift = ref(false)
+const uses_stairs = ref(false)
+const wheelchair_accessible = ref(false)
+
 const searchNodes = ref('')
 const searchMedia = ref('')
 
@@ -48,7 +52,10 @@ const submit = async () => {
       method: 'POST',
       body: {
         node_1: Number(connection_node_1.value),
-        node_2: Number(connection_node_2.value)
+        node_2: Number(connection_node_2.value),
+        uses_lift: !!uses_lift.value,
+        uses_stairs: !!uses_stairs.value,
+        wheelchair_accessible: !!wheelchair_accessible.value
       }
     }).catch(() => {})
 
@@ -121,9 +128,10 @@ const submit = async () => {
       </div>
     </div>
 
-    <div>
-      <label>Order (optional)</label>
-      <input v-model="order_num" inputmode="numeric" />
+    <div style="margin-top:8px">
+      <label style="display:block"><input type="checkbox" v-model="uses_lift" /> Uses lift</label>
+      <label style="display:block"><input type="checkbox" v-model="uses_stairs" /> Uses stairs</label>
+      <label style="display:block"><input type="checkbox" v-model="wheelchair_accessible" /> Wheelchair accessible</label>
     </div>
 
     <div>
