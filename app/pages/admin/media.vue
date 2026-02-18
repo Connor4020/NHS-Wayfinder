@@ -2,6 +2,8 @@
 import { computed, reactive, ref } from 'vue'
 
 const uploadForm = reactive({ media: '' })
+const useFile = ref(false)
+const fileInput = ref(null)
 const uploadMessage = ref('')
 const uploadLoading = ref(false)
 
@@ -43,13 +45,33 @@ const canSubmitAssign = computed(() => {
   return connection_node_1.value && connection_node_2.value && media_id.value && connection_node_1.value !== connection_node_2.value
 })
 
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
+
 const submitUpload = async () => {
   uploadMessage.value = ''
   uploadLoading.value = true
   try {
-    await $fetch('/api/upload', { method: 'POST', body: { media_type: '2', media_url: uploadForm.media } })
+    let mediaUrl = uploadForm.media
+    let mediaType = '2'
+
+    if (useFile.value && fileInput.value && fileInput.value.files && fileInput.value.files[0]) {
+      const file = fileInput.value.files[0]
+      mediaUrl = await readFileAsDataURL(file)
+      if (file.type && file.type.startsWith('video')) mediaType = '1'
+      else mediaType = '2'
+    }
+
+    await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl } })
     uploadMessage.value = 'Media uploaded successfully.'
     Object.keys(uploadForm).forEach((k) => { uploadForm[k] = '' })
+    if (fileInput.value) fileInput.value.value = null
     if (refreshMedia) { await refreshMedia() }
   } catch (e) {
     uploadMessage.value = e?.data?.statusMessage || 'Failed to upload media.'
@@ -108,10 +130,27 @@ const columns = computed(() => (media?.value?.length ? Object.keys(media.value[0
       <h2>Upload media</h2>
       <form @submit.prevent="submitUpload">
         <div>
-          <label for="media">Select media link:</label>
-          <input id="media" name="media" type="url" v-model="uploadForm.media" required />
+          <label>
+            <input type="radio" v-model="useFile" :value="false" /> Use link
+          </label>
+          <label style="margin-left: 12px">
+            <input type="radio" v-model="useFile" :value="true" /> Upload file
+          </label>
         </div>
-        <button type="submit" :disabled="uploadLoading">{{ uploadLoading ? 'Uploading…' : 'Upload' }}</button>
+
+        <div style="margin-top:8px">
+          <div v-if="!useFile">
+            <label for="media">Media link (URL):</label>
+            <input id="media" name="media" type="url" v-model="uploadForm.media" required />
+          </div>
+
+          <div v-else>
+            <label for="file">Choose file:</label>
+            <input id="file" ref="fileInput" type="file" accept="image/*,video/*" />
+          </div>
+        </div>
+
+        <button type="submit" :disabled="uploadLoading" style="margin-top:12px">{{ uploadLoading ? 'Uploading…' : 'Upload' }}</button>
       </form>
       <div v-if="uploadMessage">{{ uploadMessage }}</div>
     </section>
