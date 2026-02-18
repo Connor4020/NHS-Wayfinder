@@ -12,6 +12,17 @@ export default {
 
 <template>
   <Header/>
+<div class="background-image">
+  <div class="box-container">
+    <h1 class="welcome-message">NHS</h1>
+    <h1 class="welcome-message">Pathfinder</h1>
+    <p class="hospital-name">Northern General Hospital</p>
+  </div>
+  <div class="box-container">
+    <h1 class="">Find your location</h1>
+    <p class="hospital-name">Northern General Hospital</p>
+  </div>
+</div>
   <div>
     <h1>Welcome to Wayfinder</h1>
     <p>

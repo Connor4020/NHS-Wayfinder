@@ -99,6 +99,53 @@ input:focus {
 .btn-submit:hover {
     background-color: #0056b3;
 }
+
+.background-image {
+    background-image: url('../resources/Main_image_twilight.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding: 40px 20px;
+
+    flex-direction: column;      
+}
+
+.box-container{
+    background-color: #005EB8;
+    height: 40%;
+    width:50%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    margin-top: 100px;
+}
+
+.container {
+    background-color: #005EB8;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.welcome-message {
+    font-size: 50px;
+    color: #ffffff;
+    margin: 0;
+}
+
+.hospital-name {
+    font-size: 20px;
+    color: #ffffff;
+    margin: 0;
+    font-style: italic;
+}
+
 @media only screen and (max-width: 600px) {
 
 }
