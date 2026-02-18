@@ -2,10 +2,7 @@
   <div style="padding: 20px">
     <h2>Graph</h2>
     <p>
-      A: { neighbors: ["B", "C"], accessible: true }, B: { neighbors: ["D",
-      "E"], accessible: true }, C: { neighbors: ["F"], accessible: false }, D: {
-      neighbors: [], accessible: true }, E: { neighbors: ["F"], accessible: true
-      }, F: { neighbors: [], accessible: true },
+      {{ formattedGraph }}
     </p>
 
     <div>
@@ -27,7 +24,7 @@
 
     <div v-if="shortestPath" style="margin-top: 20px">
       <strong>Shortest Path:</strong>
-      {{ shortestPath.join(" → ") }}
+      {{ shortestPath.join(" -> ") }}
     </div>
 
     <div v-else-if="searched" style="color: red">No valid path found.</div>
@@ -42,11 +39,13 @@
 </template>
 
 <script>
-import { graph, bfsShortestPath } from "@/../util/bfs";
+import { bfsShortestPath } from "@/../util/bfs";
+import { graph } from "@/../util/graph";
 
 export default {
   data() {
     return {
+      graph: createGraph(),
       startNode: "",
       targetNode: "",
       wheelchairMode: false,
@@ -57,14 +56,14 @@ export default {
 
   computed: {
     formattedGraph() {
-      return JSON.stringify(graph, null, 2);
+      return JSON.stringify(this.graph, null, 2);
     },
   },
 
   methods: {
     runBFS() {
       this.shortestPath = bfsShortestPath(
-        graph,
+        this.graph,
         this.startNode.trim().toLocaleUpperCase(),
         this.targetNode.trim().toLocaleUpperCase(),
         this.wheelchairMode,

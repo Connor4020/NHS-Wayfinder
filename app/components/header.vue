@@ -11,7 +11,7 @@
         </div>    
         <nav class="navbar">
             <ul>
-                <li id="link1"><a href="#home">Home</a></li>
+                <li id="link1"><a href="index">Home</a></li>
                 <li id="link2"><a href="#services">Services</a></li>
                 <li id="link3"><a href="#about">About</a></li>
                 <li id="link4"><a href="#contact">Contact</a></li>
