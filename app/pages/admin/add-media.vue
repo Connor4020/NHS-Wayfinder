@@ -23,7 +23,7 @@ async function submit() {
   <div>
     <h1>Add Media</h1>
     <p>This page will allow you to add media to the system.</p>
-    <div v-if="columnsPending">Loading form…</div>
+    <div v-if="columnsPending">Loading </div>
     <form v-else @submit.prevent="submit">
       <div>
         <label for="media">Select media link:</label>
