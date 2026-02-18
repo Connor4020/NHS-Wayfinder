@@ -19,7 +19,6 @@
                 <li id="link3"><a href="#about">About</a></li>
                 <li id="link4"><a href="#contact">Contact</a></li>
                 <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
-
             </ul>
         </nav>
         <div class="dropdown" v-show="isDropdownOpen">
