@@ -2,10 +2,7 @@
   <div style="padding: 20px">
     <h2>Graph</h2>
     <p>
-      A: { neighbors: ["B", "C"], accessible: true }, B: { neighbors: ["D",
-      "E"], accessible: true }, C: { neighbors: ["F"], accessible: false }, D: {
-      neighbors: [], accessible: true }, E: { neighbors: ["F"], accessible: true
-      }, F: { neighbors: [], accessible: true },
+      {{ formattedGraph }}
     </p>
 
     <div>
@@ -27,7 +24,7 @@
 
     <div v-if="shortestPath" style="margin-top: 20px">
       <strong>Shortest Path:</strong>
-      {{ shortestPath.join(" → ") }}
+      {{ shortestPath.join(" -> ") }}
     </div>
 
     <div v-else-if="searched" style="color: red">No valid path found.</div>
