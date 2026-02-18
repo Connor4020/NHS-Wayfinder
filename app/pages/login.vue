@@ -26,7 +26,7 @@ const loginUser = async () => {
     const data = await res.json()
     try { await fetchUserData() } catch (_) {}
     message.value = 'Login successful!'
-    router.push('/')
+    router.push('/admin/dashboard')
   } catch (err) {
     message.value = 'Login failed: wrong credentials or server error.'
   }

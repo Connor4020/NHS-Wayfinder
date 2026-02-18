@@ -6,6 +6,7 @@
             </div>
             <div class="account">
                 <NuxtLink v-if="!user" to="/login">Login</NuxtLink>
+                <span v-else class="account-user">Hi {{ user.username }}</span>
             </div>
         </div>    
         <nav class="navbar">
@@ -23,51 +24,34 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="/login">Login</a></li>
+                <li v-if="!user"><a href="/login">Login</a></li>
+                <li v-if="user"><NuxtLink to="/admin/add-node">Add Node</NuxtLink></li>
+                <li v-if="user"><NuxtLink to="/admin/assign-media">Assign Media</NuxtLink></li>
+                <li v-if="user"><a href="#" @click.prevent="logout">Logout</a></li>
             </ul>
         </div>
     </header>
 </template>
 
-<script>
-import '../public/css/header.css';
+<script setup>
+import '../public/css/header.css'
+import { ref, computed } from 'vue'
 
-export default {
-  name: 'AppHeader',
-  data() {
-    return {
-      isDropdownOpen: false
-    };
-  },
-  methods: {
-    toggleDropdown() {
-      this.isDropdownOpen = !this.isDropdownOpen;
-    }
-  }
-};
+const isDropdownOpen = ref(false)
+const toggleDropdown = () => { isDropdownOpen.value = !isDropdownOpen.value }
 
+// fetch current user; returns { user: null } when not authenticated
+const { data: current } = await useFetch('/api/current-user')
+const user = computed(() => current.value?.user ?? null)
 
-
-async function handleLogout() {
-  try {
-    await logout();
-  } catch (_) {}
-
-
-  logoutMessage.value = user.value
-    ? `Goodbye ${user.value.username}! You have been logged out.`
-    : "Logout successful.";
-  showLogoutSuccess.value = true;
-
-  setTimeout(() => {
-    showLogoutSuccess.value = false;
+const logout = async () => {
     try {
-      router.push("/");
-    } catch (_) {}
-  }, 2000);
+        await $fetch('/api/logout', { method: 'POST' })
+    } catch (err) {
+        // ignore errors but log for debugging
+        console.error('logout failed', err)
+    }
+    // reload to update auth state
+    window.location.href = '/'
 }
-
-const showLogoutSuccess = ref(false);
-const logoutMessage = ref("");
-
 </script>
