@@ -36,6 +36,7 @@ const selectedConnection = computed(() => {
 
 
 <template>
+
   <div>
     <h1>Selected route</h1>
 
@@ -45,6 +46,7 @@ const selectedConnection = computed(() => {
     <div v-if="selectedConnection">
       <h2>{{ nodesMap[selectedConnection.node_1] || selectedConnection.node_1 }} → {{ nodesMap[selectedConnection.node_2] || selectedConnection.node_2 }}</h2>
       <div>
+        <h3>Route details:</h3>
         <span v-if="selectedConnection.wheelchair_accessible"> • wheelchair accessible</span>
         <span v-if="selectedConnection.uses_lift"> • lift</span>
         <span v-if="selectedConnection.uses_stairs"> • stairs</span>

@@ -1,12 +1,6 @@
 <script>
 import { user } from "~~/server/api/use-auth";
-import Header from "../components/header.vue";
 
-export default {
-  components: {
-    Header,
-  },
-};
 
 
 
@@ -18,7 +12,6 @@ export default {
 </script>
 
 <template>
-    <Header/>
   <div class="background-image">
     <div class="box-container">
       <h1 class="welcome-message">NHS</h1>

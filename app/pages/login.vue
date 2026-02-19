@@ -37,14 +37,7 @@ const loginUser = async () => {
 </script>
 
 <template>
-  <header>
-    <div id="Topbar">
-      <div class="logo">
-        <img src="/resources/nhs_logo.jpg" alt="NHS Wayfinder Logo">
-        <p class="logo-text">Northern General Hospital</p>
-      </div>
-    </div>
-  </header>
+
 
   <main>
     <h1>Log in to your NHS Wayfinder account</h1>

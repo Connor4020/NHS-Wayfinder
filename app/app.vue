@@ -1,7 +1,17 @@
+<script>
+import Header from "./components/header.vue";
 
-<script setup lang="ts">
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
+
+<script setup>
 import { onMounted } from 'vue'
 import useAuth from '../server/api/use-auth'
+
 
 const { user, fetchUserData, logout, error } = useAuth()
 
@@ -45,6 +55,9 @@ console.log('Current user:', user.value)
 
 </script>
 
+
+
 <template>
+  <Header/>
   <NuxtPage />
 </template>

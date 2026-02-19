@@ -53,13 +53,13 @@ async function handleLogout() {
                     Logout
                 </NuxtLink>
             </div>
-        </div>    
+        </div>
         <nav class="navbar">
             <ul>
-                <li id="link1"><a href="index">Home</a></li>
-                <li id="link2"><a href="#FindLocation">Find Location</a></li>
-                <li id="link3"><a href="#about">About</a></li>
-                <li id="link4"><a href="#contact">Contact</a></li>
+                <li id="link1"><NuxtLink to="/">Home</NuxtLink></li>
+                <li id="link2"><NuxtLink to="/find-location">Find Location</NuxtLink></li>
+                <li id="link3"><NuxtLink to="/about">About</NuxtLink></li>
+                <li id="link4"><NuxtLink to="/contact">Contact</NuxtLink></li>
                 <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
             </ul>
         </nav>
