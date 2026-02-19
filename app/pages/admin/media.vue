@@ -14,7 +14,7 @@ async function deleteMedia(media_url) {
   }
 }
 
-const uploadForm = reactive({ media: '' })
+const uploadForm = reactive({ media: '', file_name: '' })
 const useFile = ref(false)
 const fileInput = ref(null)
 const uploadMessage = ref('')
@@ -80,8 +80,9 @@ const submitUpload = async () => {
       if (file.type && file.type.startsWith('video')) mediaType = '1'
       else mediaType = '2'
 
-      // include original filename so server can preserve it
-      await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl, file_name: file.name } })
+      // include user-provided filename if present, otherwise original filename
+      const sendName = (uploadForm.file_name && String(uploadForm.file_name).trim()) ? String(uploadForm.file_name).trim() : file.name
+      await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl, file_name: sendName } })
       uploadMessage.value = 'Media uploaded successfully.'
       Object.keys(uploadForm).forEach((k) => { uploadForm[k] = '' })
       if (fileInput.value) fileInput.value.value = null
@@ -171,6 +172,10 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
           <div v-else>
             <label for="file">Choose file:</label>
             <input id="file" ref="fileInput" type="file" accept="image/*,video/*" />
+            <div style="margin-top:8px">
+              <label for="file_name">Save as (optional):</label>
+              <input id="file_name" name="file_name" type="text" v-model="uploadForm.file_name" placeholder="custom-name.mp4 or leave blank" />
+            </div>
           </div>
         </div>
 
