@@ -114,7 +114,7 @@ console.log('connections data:', connections.value)
                 <tr>
                     <th style="text-align:left">From</th>
                     <th style="text-align:left">To</th>
-                    <th style="text-align:left">Wheelchair accessible</th>
+                    <th style="text-align:left">Wheelchair inaccessible</th>
                     <th></th>
                 </tr>
             </thead>

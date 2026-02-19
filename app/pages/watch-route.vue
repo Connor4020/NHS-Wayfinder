@@ -51,7 +51,7 @@ const nextMedia = () => {
 
 <template>
 
-  <div>
+  <div class="box-container-center">
     <h1>Selected route</h1>
 
     <p v-if="connectionsPending || nodesPending">Loading route...</p>
@@ -59,12 +59,12 @@ const nextMedia = () => {
 
     <div v-if="selectedConnection">
       <h2>{{ nodesMap[selectedConnection.node_1] || selectedConnection.node_1 }} → {{ nodesMap[selectedConnection.node_2] || selectedConnection.node_2 }}</h2>
-      <div>
+      <div class="location-text">
         <h3>Route details:</h3>
         <span v-if="selectedConnection.is_wheelchair_inaccessible"> • wheelchair inaccessible</span>
       </div>
 
-      <div v-if="mediaList && mediaList.length">
+      <div v-if="mediaList && mediaList.length" class="">
         <h3>Media</h3>
         <div>
           <div v-if="currentMedia">
