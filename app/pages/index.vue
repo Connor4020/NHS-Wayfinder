@@ -33,7 +33,7 @@ import { user } from "~~/server/api/use-auth";
     </div>
   </div>
 
-  <div>
+  <div class="admin-links">
     <NuxtLink to="/admin/media">Media</NuxtLink>
     <NuxtLink to="/admin/list-routesadmin">List routesadmin</NuxtLink>
     <NuxtLink to="/admin/review-media">Review Media</NuxtLink>

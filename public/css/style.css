@@ -1,3 +1,7 @@
+.admin-links a {
+    padding-right: 10px;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
