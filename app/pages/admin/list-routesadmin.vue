@@ -31,8 +31,21 @@ async function deleteConnection(node_1, node_2) {
     }
 }
 
+async function deleteConnectionMedia(connection_node_1: number, connection_node_2: number, media_id: number) {
+    if (!confirm(`Delete media ${media_id} from connection ${connection_node_1} → ${connection_node_2}?`)) return
+    deleting.value = true
+    try {
+        await $fetch('/api/connection-media', { method: 'DELETE', body: { connection_node_1, connection_node_2, media_id } })
+        await refresh()
+    } catch (err) {
+        alert(String(err?.message || err))
+    } finally {
+        deleting.value = false
+    }
+}
 
-const { data: connections, pending, error } = await useFetch('/api/connection')
+
+const { data: connections, pending, error, refresh } = await useFetch('/api/connection')
 const { data: nodes, pending: nodesPending, error: nodesError } = await useFetch('/api/node')
 
 
@@ -83,6 +96,7 @@ console.log('connections data:', connections.value)
                             <a :href="m.media_url" target="_blank">Open media {{ m.media_id }}</a>
                         </span>
                         <small style="margin-left:8px">(id: {{ m.media_id }}{{ m.order_num ? ', order: ' + m.order_num : '' }})</small>
+                        <button :disabled="deleting" @click="deleteConnectionMedia(c.node_1, c.node_2, m.media_id)">Delete</button>
                     </div>
                     </li>
                     </ul>
