@@ -47,8 +47,7 @@ import { user } from "~~/server/api/use-auth";
   <div>
     <h1>Welcome to Wayfinder</h1>
     <p>
-      <NuxtLink to="/show-users">View Users</NuxtLink>
-      <NuxtLink to="/add-user">Add User</NuxtLink>
+      <NuxtLink to="admin/users"> Users</NuxtLink>
     </p>
 
   </div>
