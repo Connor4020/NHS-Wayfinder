@@ -235,7 +235,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 
         <div>
           <button :disabled="assignLoading || !canSubmitAssign" @click="submitAssign">{{ assignLoading ? 'Saving…' : 'Create connection & assign media' }}</button>
-          <NuxtLink to="/admin/add-node">Add node</NuxtLink>
+          <NuxtLink to="/admin/node">Add node</NuxtLink>
         </div>
 
         <p v-if="assignMessage">{{ assignMessage }}</p>
