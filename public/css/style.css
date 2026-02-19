@@ -145,6 +145,7 @@ input:focus {
     padding: 22px 26px;
     margin-top: 50px;
     margin-bottom: 50px;
+    border-radius: 7px;
 }
 
 .box-container-center {
@@ -158,6 +159,7 @@ input:focus {
     justify-content: center;
     padding: 22px 26px;
     box-sizing: border-box;
+    border-radius: 7px;
 }
 
 .location-text {

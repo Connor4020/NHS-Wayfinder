@@ -1,14 +1,10 @@
 <script>
 import { user } from "~~/server/api/use-auth";
 
-
-
-
 // <NuxtLink to="/admin/create-routemap">Create Route Map</NuxtLink>
 // <NuxtLink to="/admin/edit-routemap">Edit Route Map</NuxtLink>
 //     <NuxtLink to="/admin/create-route">Create Route</NuxtLink>
 //       <NuxtLink to="/list-routes">View Routes</NuxtLink>
-
 </script>
 
 <template>
@@ -23,33 +19,16 @@ import { user } from "~~/server/api/use-auth";
         <h2>Find your path:</h2>
         <p>Enter your start location</p>
       </div>
-    <input type="text" placeholder="Enter your current location">
-    <div class="location-text">
+      <input type="text" placeholder="Enter your current location" />
+      <div class="location-text">
         <p>Enter your destination</p>
       </div>
-      <input type="text" placeholder="Enter your destination">
+      <input type="text" placeholder="Enter your destination" />
       <div class="checkbox-group">
-        <label>
-          <input type="checkbox"> No Stairs
-        </label>
-
-        <label>
-          <input type="checkbox"> No Elevators
-        </label>
-
-        <label>
-          <input type="checkbox"> Wheelchair Accessible
-        </label>
+        <label> <input type="checkbox" /> Wheelchair Accessible </label>
       </div>
       <a href="#" class="button">Start Pathway</a>
     </div>
-  </div>
-  <div>
-    <h1>Welcome to Wayfinder</h1>
-    <p>
-      <NuxtLink to="admin/users"> Users</NuxtLink>
-    </p>
-
   </div>
 
   <div>
@@ -59,6 +38,6 @@ import { user } from "~~/server/api/use-auth";
     <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
     <NuxtLink to="/admin/node">Add Node</NuxtLink>
     <NuxtLink to="/admin/connections">Connections</NuxtLink>
-
+    <NuxtLink to="admin/users"> Users</NuxtLink>
   </div>
 </template>
