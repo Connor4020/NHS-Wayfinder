@@ -248,7 +248,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
     <div v-if="error">Error loading media.</div>
     <div v-else-if="pending">Loading...</div>
     <div v-else>
-      <table v-if="media && media.length">
+      <table v-if="media && media.length" class="styled-table">
         <thead>
           <tr>
             <th v-for="col in columns" :key="col">{{ col }}</th>
@@ -273,7 +273,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
     <div v-if="error">Error loading media resources.</div>
     <div v-else-if="pending">Loading...</div>
     <div v-else>
-      <table v-if="media && media.length">
+      <table v-if="media && media.length" class="styled-table">
         <thead>
           <tr>
             <th v-for="col in columns" :key="col">{{ col }}</th>
