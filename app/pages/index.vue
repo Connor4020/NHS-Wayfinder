@@ -35,9 +35,8 @@ import { user } from "~~/server/api/use-auth";
 
   <div class="admin-links">
     <NuxtLink to="/admin/media">Media</NuxtLink>
-    <NuxtLink to="/admin/list-routesadmin">List routesadmin</NuxtLink>
-    <NuxtLink to="/admin/review-media">Review Media</NuxtLink>
     <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
+    <NuxtLink to="/admin/dashboard">Dashboard</NuxtLink>
     <NuxtLink to="/admin/node">Add Node</NuxtLink>
     <NuxtLink to="/admin/connections">Connections</NuxtLink>
     <NuxtLink to="admin/users"> Users</NuxtLink>
