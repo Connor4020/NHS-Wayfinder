@@ -41,7 +41,7 @@ const { data: locations, pending, error } = await useFetch('/api/node')
         </div>
         <div>
             <button :disabled="loading || !valid" @click="submit">Create Node</button>
-            <NuxtLink to="/admin/assign-media">Assign media</NuxtLink>
+            <NuxtLink to="/admin/media">Assign media</NuxtLink>
         </div>
         <p v-if="message">{{ message }}</p>
     </div>

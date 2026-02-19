@@ -79,6 +79,15 @@ const submitUpload = async () => {
       mediaUrl = await readFileAsDataURL(file)
       if (file.type && file.type.startsWith('video')) mediaType = '1'
       else mediaType = '2'
+
+      // include original filename so server can preserve it
+      await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl, file_name: file.name } })
+      uploadMessage.value = 'Media uploaded successfully.'
+      Object.keys(uploadForm).forEach((k) => { uploadForm[k] = '' })
+      if (fileInput.value) fileInput.value.value = null
+      if (refreshMedia) { await refreshMedia() }
+      uploadLoading.value = false
+      return
     }
 
     await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl } })
@@ -205,7 +214,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
           <label>Media</label>
           <select v-model="media_id">
             <option :value="null">-- select --</option>
-            <option v-for="m in filteredMedia" :key="m.media_id" :value="m.media_id">{{ m.media_type }} — {{ m.media_id }}</option>
+            <option v-for="m in filteredMedia" :key="m.media_id" :value="m.media_id">{{ displayMediaUrl(m.media_url) }} — {{ m.media_id }}</option>
           </select>
         </div>
 
