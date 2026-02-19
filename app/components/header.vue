@@ -1,40 +1,3 @@
-<template>
-    <header class="header">
-        <div id="Topbar">
-            <div class="logo">
-              <img src="/resources/nhs_logo.jpg" alt="NHS Wayfinder Logo">
-                            <p class="logo-text">Northern General Hospital</p>
-            </div>
-            <div class="account">
-                <NuxtLink v-if="!user" to="/login">Login</NuxtLink>
-                <NuxtLink v-else to="#" @click.prevent="handleLogout">
-                    Logout
-                </NuxtLink>
-            </div>
-        </div>    
-        <nav class="navbar">
-            <ul>
-                <li id="link1"><a href="index">Home</a></li>
-                <li id="link2"><a href="#FindLocation">Find Location</a></li>
-                <li id="link3"><a href="#about">About</a></li>
-                <li id="link4"><a href="#contact">Contact</a></li>
-                <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
-            </ul>
-        </nav>
-        <div class="dropdown" v-show="isDropdownOpen">
-            <ul>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li v-if="!user"><a href="/login">Login</a></li>
-                <li v-if="user"><NuxtLink to="/admin/add-node">Add Node</NuxtLink></li>
-                <li v-if="user"><NuxtLink to="/admin/assign-media">Assign Media</NuxtLink></li>
-                <li v-if="user"><a href="#" @click.prevent="logout">Logout</a></li>
-            </ul>
-        </div>
-    </header>
-</template>
-
 <script setup>
 import '../public/css/header.css'
 import { ref, computed } from 'vue'
@@ -76,3 +39,40 @@ async function handleLogout() {
   }, 2000);
 }
 </script>
+
+<template>
+    <header class="header">
+        <div id="Topbar">
+            <div class="logo">
+              <img src="/resources/nhs_logo.jpg" alt="NHS Wayfinder Logo">
+                            <p class="logo-text">Northern General Hospital</p>
+            </div>
+            <div class="account">
+                <NuxtLink v-if="!user" to="/login">Login</NuxtLink>
+                <NuxtLink v-else to="#" @click.prevent="handleLogout">
+                    Logout
+                </NuxtLink>
+            </div>
+        </div>    
+        <nav class="navbar">
+            <ul>
+                <li id="link1"><a href="index">Home</a></li>
+                <li id="link2"><a href="#FindLocation">Find Location</a></li>
+                <li id="link3"><a href="#about">About</a></li>
+                <li id="link4"><a href="#contact">Contact</a></li>
+                <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
+            </ul>
+        </nav>
+        <div class="dropdown" v-show="isDropdownOpen">
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li v-if="!user"><a href="/login">Login</a></li>
+                <li v-if="user"><NuxtLink to="/admin/add-node">Add Node</NuxtLink></li>
+                <li v-if="user"><NuxtLink to="/admin/assign-media">Assign Media</NuxtLink></li>
+                <li v-if="user"><a href="#" @click.prevent="logout">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+</template>
