@@ -123,7 +123,7 @@ const nextMedia = () => {
               </span>
               <h4 style="margin-top:12px">Details for this media:</h4>
               <small style="margin-left:8px">(id: {{ currentMedia.media_id }}{{ currentMedia.order_num ? ', order: ' + currentMedia.order_num : '' }})</small>
-              <div v-if="currentMedia.content_desc" style="margin-top:6px"><em>{{ currentMedia.content_desc }}</em></div>
+              <div v-if="currentMedia.content_desc" style="margin-top:6px"><p>{{ currentMedia.content_desc }}</p></div>
             </div>
 
             <div style="margin-top:8px">
