@@ -11,39 +11,39 @@ import '../public/css/index.css'
 <template>
   <div class="background-image">
     <div class="box-container">
-      <h1 class="welcome-message">{{ $t('home.title_nhs') }}</h1>
-      <h1 class="welcome-message">{{ $t('home.title_pathfinder') }}</h1>
-      <p class="hospital-name">{{ $t('home.hospital_name') }}</p>
+      <h1 class="welcome-message">NHS</h1>
+      <h1 class="welcome-message">Pathfinder</h1>
+      <p class="hospital-name">Northern General Hospital</p>
     </div>
 
     <div class="box-container-center">
       <div class="location-text">
-        <h2>{{ $t('home.find_path') }}</h2>
-        <p>{{ $t('home.enter_start') }}</p>
+        <h2>Find your path:</h2>
+        <p>Enter your start location.</p>
       </div>
-      <input type="text" :placeholder="$t('home.placeholder_current')" />
+      <input type="text" placeholder="Enter your current location" />
 
       <div class="location-text">
-        <p>{{ $t('home.enter_dest') }}</p>
+        <p>Enter your destination.</p>
       </div>
-      <input type="text" :placeholder="$t('home.placeholder_dest')" />
+      <input type="text" placeholder="Enter your destination" />
 
       <div class="checkbox-group">
         <label>
-          <input type="checkbox" /> {{ $t('home.wheelchair_access') }}
+          <input type="checkbox" /> I'm in a wheelchair / don't use elevators.
         </label>
       </div>
 
-      <a href="#" class="button">{{ $t('home.start_pathway') }}</a>
+      <a href="#" class="button">Start Pathway</a>
     </div>
   </div>
 
   <div class="admin-links">
-    <NuxtLink to="/admin/media">{{ $t('admin.media') }}</NuxtLink>
-    <NuxtLink to="/admin/bfs-debug">{{ $t('admin.bfs_debug') }}</NuxtLink>
-    <NuxtLink to="/admin/dashboard">{{ $t('admin.dashboard') }}</NuxtLink>
-    <NuxtLink to="/admin/node">{{ $t('admin.add_node') }}</NuxtLink>
-    <NuxtLink to="/admin/connections">{{ $t('admin.connections') }}</NuxtLink>
-    <NuxtLink to="admin/users"> {{ $t('admin.users') }}</NuxtLink>
+    <NuxtLink to="/admin/media">Media</NuxtLink>
+    <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
+    <NuxtLink to="/admin/dashboard">Dashboard</NuxtLink>
+    <NuxtLink to="/admin/node">Add Node</NuxtLink>
+    <NuxtLink to="/admin/connections">Connections</NuxtLink>
+    <NuxtLink to="admin/users"> Users</NuxtLink>
   </div>
 </template>
