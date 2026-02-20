@@ -74,6 +74,21 @@ const nodesMap = computed(() => {
 
 console.log('connections data:', connections.value)
 
+// Filter state
+const filterFrom = ref('')
+const filterTo = ref('')
+const filterAccessible = ref(false)
+
+const filteredConnections = computed(() => {
+    const list = (connections && connections.value) || []
+    return list.filter((c: any) => {
+        if (filterAccessible.value && !c.wheelchair_accessible) return false
+        if (filterFrom.value !== '' && String(c.node_1) !== String(filterFrom.value)) return false
+        if (filterTo.value !== '' && String(c.node_2) !== String(filterTo.value)) return false
+        return true
+    })
+})
+
 </script>
 
 
@@ -83,9 +98,27 @@ console.log('connections data:', connections.value)
         <h1>Connections</h1>
         <p v-if="pending">Loading connections...</p>
         <p v-if="error">Error: {{ error }}</p>
-        
+
+        <div style="margin:12px 0">
+            <label>From:
+                <select v-model="filterFrom">
+                    <option value="">All</option>
+                    <option v-for="n in (nodes || [])" :key="n.node_id" :value="String(n.node_id)">{{ n.node_name || n.name || n.node_id }}</option>
+                </select>
+            </label>
+            <label style="margin-left:12px">To:
+                <select v-model="filterTo">
+                    <option value="">All</option>
+                    <option v-for="n in (nodes || [])" :key="'to-' + n.node_id" :value="String(n.node_id)">{{ n.node_name || n.name || n.node_id }}</option>
+                </select>
+            </label>
+            <label style="margin-left:12px"><input type="checkbox" v-model="filterAccessible" /> Wheelchair only</label>
+            <button @click="filterFrom=''; filterTo=''; filterAccessible=false" style="margin-left:12px">Reset</button>
+            <span style="margin-left:12px">Showing {{ filteredConnections.length }} / {{ connections.length }} connections</span>
+        </div>
+
             <ul v-if="connections">
-            <li v-for="c in connections" :key="`${c.node_1}-${c.node_2}`">
+            <li v-for="c in filteredConnections" :key="`${c.node_1}-${c.node_2}`">
             <div>
                 <NuxtLink :to="{ path: '/watch-route', query: { node_1: c.node_1, node_2: c.node_2 } }">
                     <strong>{{ nodesMap[c.node_1] || c.node_1 }} → {{ nodesMap[c.node_2] || c.node_2 }}</strong>
@@ -124,7 +157,7 @@ console.log('connections data:', connections.value)
         <div v-if="pending">Loading connections…</div>
         <div v-else-if="error">Error loading connections</div>
 
-        <table v-else style="width:100%;border-collapse:collapse">
+                <table v-else style="width:100%;border-collapse:collapse">
             <thead>
                 <tr>
                     <th style="text-align:left">From</th>
@@ -133,8 +166,8 @@ console.log('connections data:', connections.value)
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr v-for="c in connections" :key="c.node_1 + '-' + c.node_2">
+                <tbody>
+                <tr v-for="c in filteredConnections" :key="c.node_1 + '-' + c.node_2">
                     <td>{{ nodeLabel(c.node_1) }} ({{ c.node_1 }})</td>
                     <td>{{ nodeLabel(c.node_2) }} ({{ c.node_2 }})</td>
                     <td>{{ c.wheelchair_accessible ? 'Yes' : 'No' }}</td>
