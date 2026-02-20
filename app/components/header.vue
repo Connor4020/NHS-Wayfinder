@@ -1,25 +1,30 @@
 <script setup>
 import "../public/css/header.css";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import GoogleTranslate from "./GoogleTranslate.vue";
+import useAuth from "../../server/api/use-auth";
 
 const isDropdownOpen = ref(false);
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-// fetch current user; returns { user: null } when not authenticated
-const { data: current } = await useFetch("/api/current-user");
-const user = computed(() => current.value?.user ?? null);
+// use shared auth composable so UI updates when other parts of the app call fetchUserData()
+const { user, fetchUserData, logout: authLogout } = useAuth();
+
+onMounted(async () => {
+  try {
+    await fetchUserData();
+  } catch (_) {}
+});
 
 const logout = async () => {
   try {
     await $fetch("/api/logout", { method: "POST" });
   } catch (err) {
-    // ignore errors but log for debugging
     console.error("logout failed", err);
   }
-  // reload to update auth state
+  try { authLogout(); } catch (_) {}
   window.location.href = "/";
 };
 </script>
