@@ -49,7 +49,6 @@ async function handleLogout() {
         <li><NuxtLink to="/admin/media">Media</NuxtLink></li>
         <li><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
         <li><NuxtLink to="/admin/dashboard">Dashboard</NuxtLink></li>
-        <li><NuxtLink to="/admin/review-media">Review Media</NuxtLink></li>
         <li><NuxtLink to="/admin/node">Add Node</NuxtLink></li>
         <li><NuxtLink to="/admin/connections">Connections</NuxtLink></li>
         <li><NuxtLink to="/admin/users">Users</NuxtLink></li>

@@ -6,6 +6,14 @@ import '../public/css/index.css'
 // <NuxtLink to="/admin/edit-routemap">Edit Route Map</NuxtLink>
 //     <NuxtLink to="/admin/create-route">Create Route</NuxtLink>
 //       <NuxtLink to="/list-routes">View Routes</NuxtLink>
+
+import { bfsShortestPath } from "@/../util/bfs";
+import { createGraph } from "@/../util/graph";
+import "../public/css/bfs-debug.css";
+
+
+
+
 </script>
 
 <template>
