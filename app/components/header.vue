@@ -34,19 +34,17 @@ const logout = async () => {
             <div class="topbar-actions">
                 <GoogleTranslate />
                 <div class="account">
-                    <NuxtLink v-if="!user" to="/login">Login</NuxtLink>
-                    <NuxtLink v-else to="#" @click.prevent="logout">
-                        Logout
-                    </NuxtLink>
+
                 </div>
             </div>
         </div>
         <nav class="navbar">
             <ul>
                 <li><NuxtLink to="/">Home</NuxtLink></li>
-                <li><NuxtLink to="/find-location">Find Location</NuxtLink></li>
                 <li id="hidelink"><NuxtLink to="/about">About</NuxtLink></li>
                 <li id="hidelink"><NuxtLink to="/contact">Contact</NuxtLink></li>
+                <li id="hidelink"><NuxtLink v-if="!user" to="/login">Login</NuxtLink></li>
+                <li id="hidelink"><NuxtLink v-else to="#" @click.prevent="logout">Logout</NuxtLink></li>
                 <li v-if="user" id="hidelink"><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
                 <li v-if="user" id="hidelink"><NuxtLink to="/admin/media">Media</NuxtLink></li>
                 <li v-if="user" id="hidelink"><NuxtLink to="/admin/dashboard">Dashboard</NuxtLink></li>
@@ -60,7 +58,6 @@ const logout = async () => {
             <ul>
                 <li v-if="!user"><a href="/login">Login</a></li>
                 <li v-if="user"><a href="#" @click.prevent="logout">Logout</a></li>
-                <li><NuxtLink to="/find-location">Find Location</NuxtLink></li>
                 <li><NuxtLink to="/about">About</NuxtLink></li>
                 <li><NuxtLink to="/contact">Contact</NuxtLink></li>
                 <li v-if="user"><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
