@@ -78,9 +78,11 @@ console.log('connections data:', connections.value)
 const filterFrom = ref('')
 const filterTo = ref('')
 const filterAccessible = ref(false)
+const filterHideAll = ref(false)
 
 const filteredConnections = computed(() => {
     const list = (connections && connections.value) || []
+    if (filterHideAll.value) return []
     return list.filter((c: any) => {
         if (filterAccessible.value && !c.wheelchair_accessible) return false
         if (filterFrom.value !== '' && String(c.node_1) !== String(filterFrom.value)) return false
@@ -113,7 +115,8 @@ const filteredConnections = computed(() => {
                 </select>
             </label>
             <label style="margin-left:12px"><input type="checkbox" v-model="filterAccessible" /> Wheelchair only</label>
-            <button @click="filterFrom=''; filterTo=''; filterAccessible=false" style="margin-left:12px">Reset</button>
+            <label style="margin-left:12px"><input type="checkbox" v-model="filterHideAll" /> Hide all connections</label>
+            <button @click="filterFrom=''; filterTo=''; filterAccessible=false; filterHideAll=false" style="margin-left:12px">Reset</button>
             <span style="margin-left:12px">Showing {{ filteredConnections.length }} / {{ connections.length }} connections</span>
         </div>
 
