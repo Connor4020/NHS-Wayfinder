@@ -58,7 +58,7 @@
     font-size: 0.85em;
     color: #666;
     margin-bottom: 20px;
-    font-style: italic;
+    font-style: italic; 
 }
 
 .form-group {
@@ -67,11 +67,15 @@
     margin-bottom: 15px;
 }
 
+.form-group label {
+    color: #ffffff;
+}
+
 label {
     font-weight: 600;
     font-size: 0.9em;
     margin-bottom: 5px;
-    color: #ffffff;
+    color: #3b3b3b;
 }
 
 input {
