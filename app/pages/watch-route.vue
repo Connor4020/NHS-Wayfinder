@@ -106,7 +106,8 @@ const nextMedia = () => {
         <h3>Route chain:</h3>
         <span v-if="connectionChain && connectionChain.length">Connections: {{ connectionChain.length }}</span>
       </div>
-
+  </div>
+  <div class="box-container-center">
       <div v-if="mediaList && mediaList.length" class="">
         <h3>Media</h3>
         <div>

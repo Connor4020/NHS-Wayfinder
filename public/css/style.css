@@ -174,11 +174,27 @@ input:focus {
     text-align: center;
 }
 
+.box-container-center h1 {
+    color: #ffffff;
+    margin: 0;
+    line-height: 1;
+    font-size: 50px;
+    margin: 10px;
+}
+
 .box-container-center h2 {
     color: #ffffff;
     margin: 0;
     line-height: 1;
     font-size: 40px;
+    margin: 10px;
+}
+
+.box-container-center h3 {
+    color: #ffffff;
+    margin: 0;
+    line-height: 1;
+    font-size: 30px;
     margin: 10px;
 }
 
