@@ -87,7 +87,7 @@ export default {
         <h2>Find your path:</h2>
 
         <div class="form-group">
-          <label>Start location:</label>
+          <label style="color: #ffffff;">Start location:</label>
           <select v-model="startNode">
             <option value="">-- Select start location --</option>
             <option
@@ -101,7 +101,7 @@ export default {
         </div>
 
         <div class="form-group">
-          <label>Target destination:</label>
+          <label style="color: #ffffff;">Target destination:</label>
           <select v-model="targetNode">
             <option value="">-- Select target destination --</option>
             <option
