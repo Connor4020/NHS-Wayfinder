@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, onUnmounted } from "vue";
 import useMediaChecks from "../../composables/useMediaChecks";
 
 const route = useRoute();
@@ -127,6 +127,23 @@ const prevMedia = () => {
 const nextMedia = () => {
   if (currentIndex.value < mediaList.value.length - 1) currentIndex.value++;
 };
+
+const speakDescription = (text) => {
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+
+  window.speechSynthesis.cancel();
+
+  if (text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  }
+};
+
+onUnmounted(() => {
+  if (typeof window !== "undefined" && window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+});
 </script>
 
 <template>
@@ -185,6 +202,13 @@ const nextMedia = () => {
                 >
                 <div v-if="currentMedia.content_desc" style="margin-top: 6px">
                   <em style="color: white">{{ currentMedia.content_desc }}</em>
+                  <button
+                    @click="speakDescription(currentMedia.content_desc)"
+                    style="margin-left: 8px; cursor: pointer"
+                    title="Read description"
+                  >
+                    🔊
+                  </button>
                 </div>
               </div>
 
@@ -255,8 +279,18 @@ const nextMedia = () => {
                     : ""
                 }})</small
               >
-              <div v-if="currentMedia.content_desc" style="margin-top: 6px">
-                <p>{{ currentMedia.content_desc }}</p>
+              <div
+                v-if="currentMedia.content_desc"
+                style="margin-top: 6px; display: flex; align-items: center"
+              >
+                <p style="margin: 0">{{ currentMedia.content_desc }}</p>
+                <button
+                  @click="speakDescription(currentMedia.content_desc)"
+                  style="margin-left: 8px; cursor: pointer"
+                  title="Read description"
+                >
+                  🔊
+                </button>
               </div>
             </div>
 
