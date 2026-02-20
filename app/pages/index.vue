@@ -97,7 +97,7 @@ export default {
       <h2>Find your path:</h2>
 
       <div class="form-group">
-        <p>Start location:</p>
+        <label>Start location:</label>
         <select v-model="startNode">
           <option value="">-- Select start location --</option>
           <option v-for="n in nodes" :key="n.node_id" :value="String(n.node_id)">{{ n.node_name }} ({{ n.node_id }})</option>
@@ -105,7 +105,7 @@ export default {
       </div>
 
       <div class="form-group">
-        <p>Target destination:</p>
+        <label>Target destination:</label>
         <select v-model="targetNode">
           <option value="">-- Select target destination --</option>
           <option v-for="n in nodes" :key="n.node_id" :value="String(n.node_id)">{{ n.node_name }} ({{ n.node_id }})</option>
