@@ -283,8 +283,8 @@ input:focus {
 
 .container {
   display: flex;
-  justify-content: center; /* horizontal */
-  align-items: center;     /* vertical */
+  justify-content: center;
+  align-items: center;
 }
 
 .welcome-message {
