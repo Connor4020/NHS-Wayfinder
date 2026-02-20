@@ -86,12 +86,6 @@ useHead({
     <div v-if="columnsPending">Loading form…</div>
     <div v-else class="form-container">
       <form @submit.prevent="submit">
-
-        <div>
-            <p>Note: Only username and password are required. Other fields will be ignored.</p>
-        </div>
-
-        <!-- just for username and password dont do other collums username and password_hash-->
         <div v-for="col in formColumns" :key="col.name" class="form-group">
           <label :for="col.name">{{ col.name === 'password_hash' ? 'password' : col.name }}</label>
           <input :id="col.name" v-model="form[col.name]" :type="col.name === 'password_hash' ? 'password' : 'text'" required />
