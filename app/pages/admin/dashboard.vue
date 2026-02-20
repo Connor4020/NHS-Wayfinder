@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import useAuth from '../../../server/api/use-auth'
+import "../public/css/dashboard.css"
 
 const { user, fetchUserData, logout, error } = useAuth()
 
@@ -37,27 +38,22 @@ async function handleLogout() {
 </script>
 
 <template>
-    <div>
-        <h1>dashboard</h1>
+  <main>
+    <h1>Dashboard</h1>
 
+    <h2 v-if="user" class="welcome-text">Welcome, {{ user.username }}</h2>
+    <h2 v-else class="welcome-text">Welcome, Guest</h2>
 
-        <h1 v-if="user">welcome {{ user.username }}</h1>
-        <h1 v-else>welcome Guest</h1>
-
-        <div>
-            <div class="admin-nav">
-                <ul>
-                    <li><NuxtLink to="/admin/media">Media</NuxtLink></li>
-                    <li><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
-                    <li><NuxtLink to="/admin/dashboard">Dashboard</NuxtLink></li>
-                    <li><NuxtLink to="/admin/review-media">Review Media</NuxtLink></li>
-                    <li><NuxtLink to="/admin/node">Add Node</NuxtLink></li>
-                    <li><NuxtLink to="/admin/connections">Connections</NuxtLink></li>
-                    <li><NuxtLink to="/admin/users"> Users</NuxtLink></li>
-                </ul>
-            </div>
-        </div>
-
-        
+    <div class="admin-nav">
+      <ul>
+        <li><NuxtLink to="/admin/media">Media</NuxtLink></li>
+        <li><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
+        <li><NuxtLink to="/admin/dashboard">Dashboard</NuxtLink></li>
+        <li><NuxtLink to="/admin/review-media">Review Media</NuxtLink></li>
+        <li><NuxtLink to="/admin/node">Add Node</NuxtLink></li>
+        <li><NuxtLink to="/admin/connections">Connections</NuxtLink></li>
+        <li><NuxtLink to="/admin/users">Users</NuxtLink></li>
+      </ul>
     </div>
+  </main>
 </template>

@@ -1,5 +1,6 @@
 <script>
 import { user } from "~~/server/api/use-auth";
+import '../public/css/index.css'
 
 // <NuxtLink to="/admin/create-routemap">Create Route Map</NuxtLink>
 // <NuxtLink to="/admin/edit-routemap">Edit Route Map</NuxtLink>

@@ -1,53 +1,53 @@
 <template>
-  <div style="padding: 20px">
-    <h2>Graph</h2>
-    <p>
-      {{ formattedGraph }}
-    </p>
+  <main>
+    <div style="padding: 20px">
+      <h2>Graph</h2>
+      <p>
+        {{ formattedGraph }}
+      </p>
 
-    <div>
-      <label>Start Node:</label>
-      <input v-model="startNode" />
+      <div class="form-group">
+        <label>Start Node:</label>
+        <input v-model="startNode" />
+      </div>
+
+      <div class="form-group">
+        <label>Target Node:</label>
+        <input v-model="targetNode" />
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" v-model="inaccessible" />
+        <label>Wheelchair User</label>
+      </div>
+
+      <button @click="runBFS">Find Shortest Path</button>
+
+      <div v-if="shortestPath" class="result-box">
+        <strong>Shortest Path:</strong>
+        <span role="button" @click="watchPath"
+          style="cursor:pointer;color:var(--nuxt-link-color,blue);text-decoration:underline">
+          {{ shortestPath.join(" -> ") }}
+        </span>
+      </div>
+
+      <div v-else-if="searched" class="error-text">No valid path found.</div>
     </div>
 
-    <div>
-      <label>Target Node:</label>
-      <input v-model="targetNode" />
+    <div class="debug-selection">
+      <hr />
+      <p>
+        Here is where you will be able to create some nodes for debugging
+        purposes.
+      </p>
     </div>
-
-    <div style="margin-top: 10px">
-      <input type="checkbox" v-model="inaccessible" />
-      <label>Wheelchair User</label>
-    </div>
-
-    <button style="margin-top: 10px" @click="runBFS">Find Shortest Path</button>
-
-    <div v-if="shortestPath" style="margin-top: 20px">
-      <strong>Shortest Path:</strong>
-      <span
-        role="button"
-        @click="watchPath"
-        style="cursor:pointer;color:var(--nuxt-link-color,blue);text-decoration:underline"
-      >
-        {{ shortestPath.join(" -> ") }}
-      </span>
-    </div>
-
-    <div v-else-if="searched" style="color: red">No valid path found.</div>
-  </div>
-
-  <div>
-    <hr />
-    <p>
-      Here is where you will be able to create some nodes for debugging
-      purposes.
-    </p>
-  </div>
+  </main>
 </template>
 
 <script>
 import { bfsShortestPath } from "@/../util/bfs";
 import { createGraph } from "@/../util/graph";
+import "../public/css/bfs-debug.css";
 
 export default {
   data() {

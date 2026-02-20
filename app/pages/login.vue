@@ -37,8 +37,6 @@ const loginUser = async () => {
 </script>
 
 <template>
-
-
   <main>
     <h1>Log in to your NHS Wayfinder account</h1>
     <form @submit.prevent="loginUser()">
