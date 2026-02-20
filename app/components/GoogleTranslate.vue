@@ -80,17 +80,34 @@ onMounted(async () => {
 }
 
 .translate-target :deep(.goog-te-gadget) {
-  color: inherit;
-  font-family: inherit;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+.translate-target :deep(.goog-te-gadget > span) {
+  display: none !important;
+}
+
+.translate-target :deep(.goog-te-gadget::before) {
+  content: 'Powered by Google Translate';
+  display: block;
+  font-size: 10px;
+  color: #c0c0c0; /* Light grey text */
+  margin-top: 4px;
+  letter-spacing: 0.5px;
 }
 
 .translate-target :deep(.goog-te-combo) {
+  margin: 0 !important;
   padding: 6px 10px;
   border-radius: 6px;
   border: 1px solid #cbd2d9;
   background: #ffffff;
   color: #1b1f23;
+  font-size: 14px !important;
   min-width: 170px;
+  cursor: pointer;
 }
 
 .translate-status {
