@@ -79,7 +79,7 @@ console.log('connections data:', connections.value)
 
 
 <template>
-    <div>
+    <div class="box-container-center">
         <h1>Connections</h1>
         <p v-if="pending">Loading connections...</p>
         <p v-if="error">Error: {{ error }}</p>
@@ -117,7 +117,7 @@ console.log('connections data:', connections.value)
             </ul>
         <p v-if="connections && connections.length === 0">No connections found.</p>
     </div>
-        <div>
+        <div class="box-container-center">
         <h1>connections management</h1>
 
         <div v-if="pending">Loading connections…</div>

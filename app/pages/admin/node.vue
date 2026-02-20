@@ -57,11 +57,12 @@ const deleteConnection = async (n1, n2) => {
 </script>
 
 <template>
-  <div>
+
+
+  <div class="box-container-center">
+      <div>
     <h1>node management</h1>
   </div>
-
-  <div>
     <h1>Add Node</h1>
     <div>
       <label>Node name</label>
@@ -75,7 +76,7 @@ const deleteConnection = async (n1, n2) => {
     <p v-if="message">{{ message }}</p>
   </div>
 
-  <div>
+  <div class="box-container-center">
     <h2>Existing Nodes</h2>
     <div v-if="errorNodes">Error loading nodes.</div>
     <div v-else-if="pendingNodes">Loading…</div>
@@ -87,7 +88,7 @@ const deleteConnection = async (n1, n2) => {
     </ul>
   </div>
 
-  <div>
+  <div class="box-container-center">
     <h2>Connections</h2>
     <div v-if="errorConnections">Error loading connections.</div>
     <div v-else-if="pendingConnections">Loading…</div>
