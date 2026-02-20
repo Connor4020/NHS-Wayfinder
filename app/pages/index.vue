@@ -45,13 +45,4 @@ import "../public/css/bfs-debug.css";
       <a href="#" class="button">Start Pathway</a>
     </div>
   </div>
-
-  <div class="admin-links">
-    <NuxtLink to="/admin/media">Media</NuxtLink>
-    <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
-    <NuxtLink to="/admin/dashboard">Dashboard</NuxtLink>
-    <NuxtLink to="/admin/node">Add Node</NuxtLink>
-    <NuxtLink to="/admin/connections">Connections</NuxtLink>
-    <NuxtLink to="admin/users"> Users</NuxtLink>
-  </div>
 </template>
