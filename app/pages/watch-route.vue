@@ -161,7 +161,7 @@ const nextMedia = () => {
               <a :href="currentMedia.media_url" target="_blank">Open media {{ currentMedia.media_id }}</a>
             </span>
             <small style="margin-left:8px">(id: {{ currentMedia.media_id }}{{ currentMedia.order_num ? ', order: ' + currentMedia.order_num : '' }})</small>
-            <div v-if="currentMedia.content_desc" style="margin-top:6px"><em>{{ currentMedia.content_desc }}</em></div>
+            <div v-if="currentMedia.content_desc" style="margin-top:6px"><p>{{ currentMedia.content_desc }}</p></div>
           </div>
 
           <div style="margin-top:8px">
@@ -178,6 +178,6 @@ const nextMedia = () => {
 
     <p v-else-if="!connectionsPending">Route not found.</p>
 
-    <NuxtLink to="/admin/list-routesadmin">Back to Routes List</NuxtLink>
+    <NuxtLink to="/">go back home</NuxtLink>
   </div>
 </template>
