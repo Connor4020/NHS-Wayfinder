@@ -140,7 +140,7 @@ const nextMedia = () => {
       <div v-if="pathNodes && pathNodes.length > 1">
         <h2 id="node-path-preview">
           Node chain: <br />
-          {{ pathNodes.join(" → ") }}
+          {{ pathNodes.map(n => (nodesMap[n] || n)).join(' → ') }}
         </h2>
         <hr style="margin-top: 25px" />
         <div>
