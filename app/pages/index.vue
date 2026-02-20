@@ -59,6 +59,11 @@ export default {
       );
 
       this.searched = true;
+      // If a valid path was found, route to the watch-route page
+      if (this.shortestPath && this.shortestPath.length) {
+        const path = this.shortestPath.join(",");
+        this.$router.push({ path: "/watch-route", query: { path } });
+      }
     },
       watchPath() {
         if (!this.shortestPath || !this.shortestPath.length) return;
