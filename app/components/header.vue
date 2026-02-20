@@ -55,7 +55,6 @@ const logout = async () => {
             <ul>
                 <li v-if="!user"><a href="/login">Login</a></li>
                 <li v-if="user"><a href="#" @click.prevent="logout">Logout</a></li>
-                <li><NuxtLink to="/find-location">Find Location</NuxtLink></li>
                 <li><NuxtLink to="/about">About</NuxtLink></li>
                 <li><NuxtLink to="/contact">Contact</NuxtLink></li>
                 <li v-if="user"><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
