@@ -73,3 +73,14 @@ main h1 {
         margin: 20px 10%;
     }
 }
+
+.media-thumb {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+video.media-thumb {
+  max-width: 120px;
+  max-height: 90px;
+}

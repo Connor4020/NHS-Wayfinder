@@ -221,6 +221,8 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
         <div>
           <label>Search media</label>
           <input v-model="searchMedia" placeholder="filter media by type or id" />
+
+
         </div>
 
         <div>
@@ -249,25 +251,25 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
         </div>
 
         <div>
-          <label>Order number (optional)</label>
-          <input v-model="order_num" type="number" min="0" />
-        </div>
-
-        <div>
-          <button :disabled="assignLoading || !canSubmitAssign" @click="submitAssign">{{ assignLoading ? 'Saving…' : 'Create connection & assign media' }}</button>
-          <NuxtLink to="/admin/node">Add node</NuxtLink>
+          <label>Media description (optional)</label>
+          <textarea v-model="content_desc" rows="2" placeholder="Short description for this media on the connection"></textarea>
         </div>
 
         <p v-if="assignMessage">{{ assignMessage }}</p>
+
+        <div>
+          <button :disabled="assignLoading || !canSubmitAssign" @click="submitAssign">{{ assignLoading ? 'Saving…' : 'Create connection & assign media' }}</button>
+
+        </div>
+        <NuxtLink to="/admin/node">Add node</NuxtLink>
+
+
       </div>
     </section>
   </div>
 
 
-        <div>
-          <label>Media description (optional)</label>
-          <textarea v-model="content_desc" rows="2" placeholder="Short description for this media on the connection"></textarea>
-        </div>
+
   <div>
     <h1>media</h1>
     <div v-if="error">Error loading media.</div>
@@ -284,8 +286,8 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
             <td v-for="col in columns" :key="col">
               <a :href="mediaItem[col]">{{ col === 'media_url' ? displayMediaUrl(mediaItem[col]) : mediaItem[col] }}</a>
             </td>
-            <img v-if="mediaItem && isImageType(mediaItem)" :src="mediaItem.media_url" alt="Media"/>
-            <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls style="max-width:200px; max-height:150px"></video>
+            <img v-if="mediaItem && isImageType(mediaItem)" :src="mediaItem.media_url" alt="Media" class="media-thumb" />
+            <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
           </tr>
         </tbody>
       </table>
@@ -316,6 +318,6 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
       </table>
       <div v-else>No media resources found.</div>
     </div>
-  </div>
+    </div>
     </div>
 </template>

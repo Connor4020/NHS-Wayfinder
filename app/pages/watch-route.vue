@@ -178,7 +178,7 @@ const nextMedia = () => {
 
     <p v-else-if="!connectionsPending">Route not found.</p>
 
-    <NuxtLink to="/">go back home</NuxtLink>
+    <NuxtLink to="/"> <button>Back to Home</button></NuxtLink>
   </div>
 </div>
 </template>
