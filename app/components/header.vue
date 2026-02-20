@@ -47,6 +47,12 @@ const logout = async () => {
                 <li id="link2"><NuxtLink to="/find-location">Find Location</NuxtLink></li>
                 <li id="link3"><NuxtLink to="/about">About</NuxtLink></li>
                 <li id="link4"><NuxtLink to="/contact">Contact</NuxtLink></li>
+                <li><NuxtLink to="/admin/media">Media</NuxtLink></li>
+                <li><NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink></li>
+                <li><NuxtLink to="/admin/dashboard">Dashboard</NuxtLink></li>
+                <li><NuxtLink to="/admin/node">Add Node</NuxtLink></li>
+                <li><NuxtLink to="/admin/connections">Connections</NuxtLink></li>
+                <li><NuxtLink to="/admin/users"> Users</NuxtLink></li>
                 <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
             </ul>
         </nav>
