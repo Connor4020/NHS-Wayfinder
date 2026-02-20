@@ -126,7 +126,7 @@ const filteredConnections = computed(() => {
                 <NuxtLink :to="{ path: '/watch-route', query: { node_1: c.node_1, node_2: c.node_2 } }">
                     <strong>{{ nodesMap[c.node_1] || c.node_1 }} → {{ nodesMap[c.node_2] || c.node_2 }}</strong>
                 </NuxtLink>
-                <span v-if="c.wheelchair_accessible"> - wheelchair accessible</span>
+                <p v-if="c.wheelchair_accessible"> - wheelchair accessible</p>
             </div>
             <div v-if="c.media && c.media.length">
                 <h5>Connected media</h5>
@@ -145,7 +145,7 @@ const filteredConnections = computed(() => {
                         <small style="margin-left:8px">(id: {{ m.media_id }}{{ m.order_num ? ', order: ' + m.order_num : '' }})</small>
                         <button :disabled="deleting" @click="deleteConnectionMedia(c.node_1, c.node_2, m.media_id)">Delete</button>
                         <button :disabled="deleting" @click="editConnectionMediaDesc(c.node_1, c.node_2, m.media_id, m.content_desc)">Edit description</button>
-                        <div v-if="m.content_desc" style="margin-top:6px"><em>{{ m.content_desc }}</em></div>
+                        <div v-if="m.content_desc" style="margin-top:6px"><p>{{ m.content_desc }}</p></div>
                     </div>
                     </li>
                     </ul>
