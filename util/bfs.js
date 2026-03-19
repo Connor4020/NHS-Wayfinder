@@ -2,15 +2,20 @@
 
 
 // Main function.
-export function bfsShortestPath(graph, start, target, wheelchairMode) {
-  const startKey = String(start);
-  const targetKey = String(target);
+export function bfsShortestPath(nodeGraph, startNode, targetNode, isWheelchairMode) {
+  // Converts start and target node into a string.
+  const startKey = String(startNode);
+  const targetKey = String(targetNode);
 
-  if (!graph[startKey] || !graph[targetKey]) return null;
+  // Checks the inputted nodes to see they exist.
+  if (!nodeGraph[startKey] || !nodeGraph[targetKey]) return null;
 
+  // Queue is where the explored nodes that want to be visited go.
   const queue = [[startKey]];
+  // Nodes that are visited go.
   const visited = new Set([startKey]);
 
+  // Condition to go if there's still nodes in the queue.
   while (queue.length > 0) {
     const path = queue.shift();
     const currentNode = path[path.length - 1];
