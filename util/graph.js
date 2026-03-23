@@ -15,19 +15,19 @@ export function createGraph(nodes, connections) {
         const nodeId = String(node.node_id).trim();
         graph[nodeId] = {
             id: nodeId,
-            name: node.node_name,
+            name: node.node_name || node.name || String(nodeId),
             neighbors: []
-        }; 
+        };
     });
 
 
     connections.forEach(connection => {
         // Gets to and from node for the connection and converts to string.
         const fromNodeId = String(connection.node_1).trim();
-        const toNodeId   = String(connection.node_2).trim();
+        const toNodeId = String(connection.node_2).trim();
 
         // Checks to see there exists a to and from node.
-        if (!graph[fromId] || !graph[toId]) {
+        if (!graph[fromNodeId] || !graph[toNodeId]) {
             return;
         }
 
@@ -43,8 +43,8 @@ export function createGraph(nodes, connections) {
         // Reverses cos of QOL reasons.
         const isInaccessible = !isAccessible;
 
-        graph[fromId].neighbors.push({
-            id: toId,
+        graph[fromNodeId].neighbors.push({
+            id: toNodeId,
             inaccessible: isInaccessible
         });
         // ^
@@ -52,8 +52,8 @@ export function createGraph(nodes, connections) {
         // Adds each other as a neighbour and the accessability value.
         // |
         // V
-        graph[toId].neighbors.push({
-            id: fromId,
+        graph[toNodeId].neighbors.push({
+            id: fromNodeId,
             inaccessible: isInaccessible
         });
     });

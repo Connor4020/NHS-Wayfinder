@@ -22,8 +22,9 @@ export function bfsShortestPath(nodeGraph, startNode, targetNode, isWheelchairMo
 
     if (currentNode === targetKey) return path;
 
-    for (let neighbor of graph[currentNode].neighbors) {
-      if (wheelchairMode && neighbor.inaccessible) {
+    const neighbors = (nodeGraph[currentNode] && nodeGraph[currentNode].neighbors) || [];
+    for (let neighbor of neighbors) {
+      if (isWheelchairMode && neighbor.inaccessible) {
         continue;
       }
 
