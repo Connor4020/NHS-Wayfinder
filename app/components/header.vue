@@ -19,8 +19,8 @@ onMounted(async () => {
 });
 
 const logout = async () => {
-  try {
-    await $fetch("/api/logout", { method: "POST" });
+    try {
+    await $fetch("/api/auth/logout", { method: "POST" });
   } catch (err) {
     console.error("logout failed", err);
   }

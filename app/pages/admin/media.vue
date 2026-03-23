@@ -14,6 +14,19 @@ async function deleteMedia(media_url) {
   }
 }
 
+async function renameMedia(mediaId) {
+  const newName = prompt('Enter display name for this media (keeps original URL):')
+  if (!newName) return
+  try {
+    await $fetch('/api/media/name', { method: 'POST', body: { media_id: Number(mediaId), media_name: String(newName).trim() } })
+    if (typeof refreshMedia === 'function') await refreshMedia()
+    alert('Display name updated')
+  } catch (err) {
+    console.error(err)
+    alert('Failed to update display name: ' + (err?.data?.statusMessage || err?.message || err))
+  }
+}
+
 const uploadForm = reactive({ media: '', file_name: '' })
 const useFile = ref(false)
 const fileInput = ref(null)
@@ -82,7 +95,7 @@ const submitUpload = async () => {
 
       // include user-provided filename if present, otherwise original filename
       const sendName = (uploadForm.file_name && String(uploadForm.file_name).trim()) ? String(uploadForm.file_name).trim() : file.name
-      await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl, file_name: sendName } })
+      await $fetch('/api/media/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl, file_name: sendName } })
       uploadMessage.value = 'Media uploaded successfully.'
       Object.keys(uploadForm).forEach((k) => { uploadForm[k] = '' })
       if (fileInput.value) fileInput.value.value = null
@@ -91,7 +104,7 @@ const submitUpload = async () => {
       return
     }
 
-    await $fetch('/api/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl } })
+    await $fetch('/api/media/upload', { method: 'POST', body: { media_type: mediaType, media_url: mediaUrl } })
     uploadMessage.value = 'Media uploaded successfully.'
     Object.keys(uploadForm).forEach((k) => { uploadForm[k] = '' })
     if (fileInput.value) fileInput.value.value = null
@@ -229,7 +242,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
           <label>Media</label>
           <select v-model="media_id">
             <option :value="null">-- select --</option>
-            <option v-for="m in filteredMedia" :key="m.media_id" :value="m.media_id">{{ displayMediaUrl(m.media_url) }} — {{ m.media_id }}</option>
+            <option v-for="m in filteredMedia" :key="m.media_id" :value="m.media_id">{{ m.media_name || displayMediaUrl(m.media_url) }} — {{ m.media_id }}</option>
           </select>
         </div>
 
@@ -284,40 +297,23 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
         <tbody>
           <tr v-for="(mediaItem, idx) in media" :key="idx">
             <td v-for="col in columns" :key="col">
-              <a :href="mediaItem[col]">{{ col === 'media_url' ? displayMediaUrl(mediaItem[col]) : mediaItem[col] }}</a>
+              <template v-if="col === 'media_url'">
+                <a :href="mediaItem[col]">{{ mediaItem.media_name || displayMediaUrl(mediaItem[col]) }}</a>
+              </template>
+              <template v-else>
+                {{ mediaItem[col] }}
+              </template>
             </td>
             <img v-if="mediaItem && isImageType(mediaItem)" :src="mediaItem.media_url" alt="Media" class="media-thumb" />
             <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
+            <td>
+              <button @click="renameMedia(mediaItem.media_id)" style="margin-right:8px">Rename</button>
+              <button @click="deleteMedia(mediaItem.media_url)">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
       <div v-else>No media found.</div>
     </div>
   </div>
-  <div>
-        <div>
-    <h1>Media Resources</h1>
-    <div v-if="error">Error loading media resources.</div>
-    <div v-else-if="pending">Loading...</div>
-    <div v-else>
-      <table v-if="media && media.length" class="styled-table">
-        <thead>
-          <tr>
-            <th v-for="col in columns" :key="col">{{ col }}</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, idx) in media" :key="idx">
-            <td v-for="col in columns" :key="col">{{ item[col] }}</td>
-            <td>
-              <button @click="deleteMedia(item.media_url)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div v-else>No media resources found.</div>
-    </div>
-    </div>
-    </div>
 </template>

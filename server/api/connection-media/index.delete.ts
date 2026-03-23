@@ -34,4 +34,3 @@ export default defineEventHandler(async (event) => {
 		throw createError({ statusCode: err?.statusCode || 500, statusMessage: msg })
 	}
 })
-

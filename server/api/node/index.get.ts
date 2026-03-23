@@ -9,4 +9,4 @@ export default defineEventHandler(async () => {
     } catch (err: any) {
         throw createError({ statusCode: 500, statusMessage: String(err?.message || err) })
     }
-}) 
+})

@@ -1,5 +1,5 @@
 import { readBody, createError, setCookie } from 'h3'
-import pool from '../../api/database'
+import pool from '~~/api/database'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 

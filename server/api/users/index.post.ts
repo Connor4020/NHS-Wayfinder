@@ -1,5 +1,5 @@
-import pool from '../../api/database';
-import bcrypt from 'bcrypt';
+import pool from '~~/api/database'
+import bcrypt from 'bcrypt'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event) || {}

@@ -10,7 +10,7 @@ export async function fetchUserData() {
   loading.value = true
   error.value = null
   try {
-    const res = await fetch('/api/current-user')
+    const res = await fetch('/api/auth/current-user')
     if (!res.ok) {
       user.value = null
       return null
@@ -31,7 +31,7 @@ export async function fetchUserData() {
 // logout helper: log out user and clear state
 export async function logout() {
   try {
-    await fetch('/api/logout', { method: 'POST' })
+    await fetch('/api/auth/logout', { method: 'POST' })
   } catch (err) {
   }
 
