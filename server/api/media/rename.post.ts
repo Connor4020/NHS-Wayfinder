@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
 
     // update database
     const [result] = await pool.query(
-      'UPDATE navigation_system.media_resource SET media_url = ? WHERE media_url = ?',
+      'UPDATE darks_db.media_resource SET media_url = ? WHERE media_url = ?',
       [newMediaUrl, media_url]
     )
 

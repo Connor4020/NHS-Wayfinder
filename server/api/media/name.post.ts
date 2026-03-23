@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     // Try update; if column missing, attempt to add it and retry
     try {
       const [result]: any = await pool.query(
-        'UPDATE navigation_system.media_resource SET media_name = ? WHERE media_id = ?',
+        'UPDATE darks_db.media_resource SET media_name = ? WHERE media_id = ?',
         [String(media_name).trim(), media_id]
       )
       const affected = result?.affectedRows || 0
@@ -31,11 +31,11 @@ export default defineEventHandler(async (event) => {
         )
         if (!cols || cols.length === 0) {
           // Add column (no IF NOT EXISTS to maximize compatibility)
-          await pool.query('ALTER TABLE navigation_system.media_resource ADD COLUMN media_name VARCHAR(255) NULL')
+          await pool.query('ALTER TABLE darks_db.media_resource ADD COLUMN media_name VARCHAR(255) NULL')
         }
 
         const [result2]: any = await pool.query(
-          'UPDATE navigation_system.media_resource SET media_name = ? WHERE media_id = ?',
+          'UPDATE darks_db.media_resource SET media_name = ? WHERE media_id = ?',
           [String(media_name).trim(), media_id]
         )
         const affected2 = result2?.affectedRows || 0
