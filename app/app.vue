@@ -47,13 +47,6 @@ async function handleLogout() {
   }, 2000);
 }
 
-
-
-
-
-
-console.log('Current user:', user.value)
-
 </script>
 
 

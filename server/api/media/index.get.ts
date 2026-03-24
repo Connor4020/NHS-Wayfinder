@@ -4,7 +4,7 @@ import pool from '~~/api/database'
 export default defineEventHandler(async () => {
   try {
     const [rows] = await pool.query(
-      'SELECT * FROM media_resource'
+      'SELECT  FROM media_resource'
     )
     return rows
   } catch (err: any) {
