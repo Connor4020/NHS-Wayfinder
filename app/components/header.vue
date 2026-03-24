@@ -45,12 +45,6 @@ const logout = async () => {
         <li><NuxtLink to="/">Home</NuxtLink></li>
         <li id="hidelink"><NuxtLink to="/about">About</NuxtLink></li>
         <li id="hidelink"><NuxtLink to="/contact">Contact</NuxtLink></li>
-        <li id="hidelink" v-if="!user">
-          <NuxtLink to="/login">Login</NuxtLink>
-        </li>
-        <li id="hidelink" v-else>
-          <NuxtLink to="#" @click.prevent="logout">Logout</NuxtLink>
-        </li>
         <li v-if="user" id="hidelink">
           <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
         </li>
@@ -60,14 +54,11 @@ const logout = async () => {
         <li v-if="user" id="hidelink">
           <NuxtLink to="/admin/dashboard">Dashboard</NuxtLink>
         </li>
-        <li v-if="user" id="hidelink">
-          <NuxtLink to="/admin/node">Add Node</NuxtLink>
+         <li id="hidelink" v-if="!user">
+          <NuxtLink to="/login">Login</NuxtLink>
         </li>
-        <li v-if="user" id="hidelink">
-          <NuxtLink to="/admin/connections">Connections</NuxtLink>
-        </li>
-        <li v-if="user" id="hidelink">
-          <NuxtLink to="/admin/users"> Users</NuxtLink>
+        <li id="hidelink" v-else>
+          <NuxtLink to="#" @click.prevent="logout">Logout</NuxtLink>
         </li>
         <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
       </ul>
