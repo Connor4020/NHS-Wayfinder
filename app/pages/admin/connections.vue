@@ -97,6 +97,7 @@ const filteredConnections = computed(() => {
 
 <template>
     <div class="box-container-center">
+        <AdminBackButton />
         <h1>Connections</h1>
         <p v-if="pending">Loading connections...</p>
         <p v-if="error">Error: {{ error }}</p>

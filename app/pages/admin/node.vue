@@ -60,6 +60,7 @@ const deleteConnection = async (n1, n2) => {
 
 
   <div class="box-container-center">
+    <AdminBackButton />
       <div>
     <h1>node management</h1>
   </div>

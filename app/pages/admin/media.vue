@@ -170,6 +170,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 
 <template>
   <div>
+    <AdminBackButton />
     <h1>Media management</h1>
 
     <section>

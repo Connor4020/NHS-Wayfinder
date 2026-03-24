@@ -58,6 +58,7 @@ useHead({
 
 <template>
   <div>
+    <AdminBackButton />
     <h1>User management</h1>
     <div v-if="error">Error loading users.</div>
     <div v-else-if="pending">Loading…</div>
