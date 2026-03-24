@@ -148,7 +148,7 @@ onUnmounted(() => {
 
 <template>
   <div class="container">
-    <div class="box-container-center">
+    <div>
       <h1>Selected route</h1>
 
       <p v-if="connectionsPending || nodesPending">Loading route...</p>
