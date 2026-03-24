@@ -94,12 +94,6 @@ button {
     width: 300px; 
 }
 
-.box-container-center button {
-    display: block;
-    margin: 0 auto;
-    width: clamp(180px, 70vw, 300px);
-}
-
 button:hover {
     background-color: #005622;
 }

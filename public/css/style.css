@@ -44,6 +44,48 @@
     cursor: pointer;
 }
 
+.media-thumb {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.media-thumb-hover {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+    transform-origin: center center;
+}
+
+.media-thumb-hover:hover {
+    transform: scale(1.8);
+    z-index: 2;
+}
+
+video.media-thumb {
+    max-width: 120px;
+    max-height: 90px;
+}
+
+.media-preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    cursor: zoom-out;
+}
+
+.media-preview-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.35);
+}
+
 
 .form-container {
     max-width: 400px;

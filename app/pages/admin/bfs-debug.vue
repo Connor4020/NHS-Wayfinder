@@ -1,5 +1,6 @@
 <template>
   <main>
+    <AdminBackButton />
     <div style="padding: 20px">
       <h2>Graph</h2>
       <p>
@@ -107,4 +108,5 @@ export default {
     },
   },
 };
+
 </script>

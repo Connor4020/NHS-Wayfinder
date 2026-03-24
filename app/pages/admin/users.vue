@@ -1,18 +1,20 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue'
+import useConfirmAction from '../../../composables/useConfirmAction'
 
-const { data: media, pending, refresh } = await useFetch('./api/user')
+const { confirmAndRun } = useConfirmAction()
 
 
 async function deleteUser(username) {
-  if (!confirm('Delete this user?')) return
-  try {
-    await $fetch('/api/users', { method: 'DELETE', body: { username } })
-    await refresh()
-  } catch (err) {
-    console.error(err)
-    alert('Failed to delete user')
-  }
+  await confirmAndRun('Delete this user?', async () => {
+    try {
+      await $fetch('/api/users', { method: 'DELETE', body: { username } })
+      await refreshUsers()
+    } catch (err) {
+      console.error(err)
+      alert('Failed to delete user')
+    }
+  })
 }
 
 
@@ -44,8 +46,8 @@ async function submit() {
   }
 }
 
-const { data: users2, pending2, error2 } = await useFetch('/api/users')
-const columns2 = computed(() => (users2?.value?.length ? Object.keys(users2.value[0]) : []))
+const { data: users, pending, refresh: refreshUsers } = await useFetch('/api/users')
+const columns2 = computed(() => (users?.value?.length ? Object.keys(users.value[0]) : []))
 
 useHead({
   link: [
@@ -60,18 +62,19 @@ useHead({
 
 <template>
   <div>
+    <AdminBackButton />
     <h1>User management</h1>
-    <div v-if="error2">Error loading users.</div>
-    <div v-else-if="pending2">Loading…</div>
+    <div v-if="error">Error loading users.</div>
+    <div v-else-if="pending">Loading…</div>
     <div v-else>
-      <table v-if="users2 && users2.length" class="styled-table">
+      <table v-if="users && users.length" class="styled-table">
         <thead>
           <tr>
             <th v-for="col in columns2" :key="col">{{ col }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, idx) in users2" :key="idx">
+          <tr v-for="(user, idx) in users" :key="idx">
             <td v-for="col in columns2" :key="col">{{ user[col] }}</td>
             <td><button @click="deleteUser(user.username)" class="btn-delete">Delete</button></td>
           </tr>

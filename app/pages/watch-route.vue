@@ -147,8 +147,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container" style="padding-bottom: 20px">
-    <div class="box-container-center">
+  <div class="container">
+    <div>
       <h1>Selected route</h1>
 
       <p v-if="connectionsPending || nodesPending">Loading route...</p>
@@ -156,34 +156,25 @@ onUnmounted(() => {
 
       <div v-if="pathNodes && pathNodes.length > 1">
         <h2 id="node-path-preview">
-          Node chain: <br />
+          <br />
           {{ pathNodes.map((n) => nodesMap[n] || n).join(" → ") }}
         </h2>
-        <hr style="margin-top: 25px" />
+        <hr />
         <div>
           <div v-if="mediaList && mediaList.length" class="">
-            <h3 style="margin: 0">Media</h3>
             <div>
               <div v-if="currentMedia">
-                <h4 style="color: white">
-                  Connection {{ (currentMedia.__connIndex || 0) + 1 }} of
-                  {{ connectionChain.length }}:
-                  {{ nodesMap[currentMedia.__node_1] || currentMedia.__node_1 }}
-                  →
-                  {{ nodesMap[currentMedia.__node_2] || currentMedia.__node_2 }}
-                </h4>
+                <h2>Step {{ currentIndex + 1 }} of {{ mediaList.length }}</h2>
                 <span v-if="isImageType(currentMedia)">
                   <img
                     :src="currentMedia.media_url"
                     alt="media"
-                    style="max-width: 220px; max-height: 140px"
                   />
                 </span>
                 <span v-else-if="isVideoType(currentMedia)">
                   <video
                     :src="currentMedia.media_url"
                     controls
-                    style="width: 100%; height: 100%"
                   ></video>
                 </span>
                 <span v-else>
@@ -191,20 +182,11 @@ onUnmounted(() => {
                     >Open media {{ currentMedia.media_id }}</a
                   >
                 </span>
-                <h4 style="margin-top: 12px; color: white">Instructions:</h4>
-                <small style="color: white"
-                  >(media id: {{ currentMedia.media_id
-                  }}{{
-                    currentMedia.order_num
-                      ? ", order: " + currentMedia.order_num
-                      : ""
-                  }})</small
-                >
-                <div v-if="currentMedia.content_desc" style="margin-top: 6px">
-                  <em style="color: white">{{ currentMedia.content_desc }}</em>
+                <h4>Instructions:</h4>
+                <div v-if="currentMedia.content_desc">
+                  <em>{{ currentMedia.content_desc }}</em>
                   <button
                     @click="speakDescription(currentMedia.content_desc)"
-                    style="margin-left: 8px; cursor: pointer"
                     title="Read description"
                   >
                     🔊
@@ -212,8 +194,8 @@ onUnmounted(() => {
                 </div>
               </div>
 
-              <div style="margin-top: 8px">
-                <button @click="prevMedia" :disabled="currentIndex === 0">
+              <div>
+                <button v-if="currentIndex > 0" @click="prevMedia">
                   Previous
                 </button>
 
@@ -224,7 +206,7 @@ onUnmounted(() => {
                   Next
                 </button>
               </div>
-              <span style="color: white"
+              <span
                 >({{ currentIndex + 1 }} / {{ mediaList.length }})</span
               >
             </div>
@@ -238,13 +220,13 @@ onUnmounted(() => {
       <div v-else-if="selectedConnection">
         <h2>
           {{ nodesMap[selectedConnection.node_1] || selectedConnection.node_1 }}
-          →
+          ->
           {{ nodesMap[selectedConnection.node_2] || selectedConnection.node_2 }}
         </h2>
         <div class="location-text">
           <h3>Route details:</h3>
           <span v-if="selectedConnection.wheelchair_accessible">
-            • wheelchair accessible</span
+            wheelchair accessible</span
           >
         </div>
 
@@ -252,18 +234,17 @@ onUnmounted(() => {
           <h3>Media</h3>
           <div>
             <div v-if="currentMedia">
+              <h4>Step {{ currentIndex + 1 }} of {{ mediaList.length }}</h4>
               <span v-if="isImageType(currentMedia)">
                 <img
                   :src="currentMedia.media_url"
                   alt="media"
-                  style="max-width: 220px; max-height: 140px"
                 />
               </span>
               <span v-else-if="isVideoType(currentMedia)">
                 <video
                   :src="currentMedia.media_url"
                   controls
-                  style="max-width: 320px; max-height: 180px"
                 ></video>
               </span>
               <span v-else>
@@ -271,7 +252,7 @@ onUnmounted(() => {
                   >Open media {{ currentMedia.media_id }}</a
                 >
               </span>
-              <small style="margin-left: 8px"
+              <small
                 >(id: {{ currentMedia.media_id
                 }}{{
                   currentMedia.order_num
@@ -281,12 +262,10 @@ onUnmounted(() => {
               >
               <div
                 v-if="currentMedia.content_desc"
-                style="margin-top: 6px; display: flex; align-items: center"
               >
-                <p style="margin: 0">{{ currentMedia.content_desc }}</p>
+                <p>{{ currentMedia.content_desc }}</p>
                 <button
                   @click="speakDescription(currentMedia.content_desc)"
-                  style="margin-left: 8px; cursor: pointer"
                   title="Read description"
                 >
                   🔊
@@ -294,8 +273,8 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <div style="margin-top: 8px">
-              <button @click="prevMedia" :disabled="currentIndex === 0">
+            <div>
+              <button v-if="currentIndex > 0" @click="prevMedia">
                 Previous
               </button>
               <span>{{ currentIndex + 1 }} / {{ mediaList.length }}</span>
