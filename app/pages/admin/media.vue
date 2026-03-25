@@ -1,7 +1,6 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import useMediaChecks from '../../../composables/useMediaChecks'
-import "../public/css/background.css"
 
 
 async function deleteMedia(media_url) {
@@ -173,6 +172,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
   <main>
     <div>
       <h1>Media management</h1>
+
       <section>
         <h2>Upload media</h2>
         <form @submit.prevent="submitUpload">
@@ -308,8 +308,8 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
               <img v-if="mediaItem && isImageType(mediaItem)" :src="mediaItem.media_url" alt="Media" class="media-thumb" />
               <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
               <td>
-                <button @click="renameMedia(mediaItem.media_id)" class="media-table-btn" style="margin-right:8px">Rename</button>
-                <button @click="deleteMedia(mediaItem.media_url)" class="media-table-btn">Delete</button>
+                <button @click="renameMedia(mediaItem.media_id)" style="margin-right:8px">Rename</button>
+                <button @click="deleteMedia(mediaItem.media_url)">Delete</button>
               </td>
             </tr>
           </tbody>

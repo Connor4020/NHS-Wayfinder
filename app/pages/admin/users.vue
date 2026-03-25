@@ -1,16 +1,20 @@
 <script setup>
 import { reactive, ref, computed, watch } from 'vue'
+import useConfirmAction from '../../../composables/useConfirmAction'
+
+const { confirmAndRun } = useConfirmAction()
 
 
 async function deleteUser(username) {
-  if (!confirm('Delete this user?')) return
-  try {
-    await $fetch('/api/users', { method: 'DELETE', body: { username } })
-    await refreshUsers()
-  } catch (err) {
-    console.error(err)
-    alert('Failed to delete user')
-  }
+  await confirmAndRun('Delete this user?', async () => {
+    try {
+      await $fetch('/api/users', { method: 'DELETE', body: { username } })
+      await refreshUsers()
+    } catch (err) {
+      console.error(err)
+      alert('Failed to delete user')
+    }
+  })
 }
 
 

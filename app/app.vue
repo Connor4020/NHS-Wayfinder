@@ -10,11 +10,28 @@ export default {
 </script>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import useAuth from '../server/api/use-auth'
 
 
 const { user, fetchUserData, logout, error } = useAuth()
+const globalPreviewImageUrl = ref('')
+
+const closeGlobalPreview = () => {
+  globalPreviewImageUrl.value = ''
+}
+
+const onMediaPreviewOpen = (event) => {
+  const url = event?.detail?.url
+  if (!url) return
+  globalPreviewImageUrl.value = String(url)
+}
+
+const onGlobalPreviewKeydown = (event) => {
+  if (event.key === 'Escape') {
+    closeGlobalPreview()
+  }
+}
 
 onMounted(async () => {
   try {
@@ -23,6 +40,18 @@ onMounted(async () => {
     console.error('Error fetching user data:', err)
     logout()
   }
+})
+
+onMounted(() => {
+  if (typeof window === 'undefined') return
+  window.addEventListener('media-preview:open', onMediaPreviewOpen)
+  window.addEventListener('keydown', onGlobalPreviewKeydown)
+})
+
+onBeforeUnmount(() => {
+  if (typeof window === 'undefined') return
+  window.removeEventListener('media-preview:open', onMediaPreviewOpen)
+  window.removeEventListener('keydown', onGlobalPreviewKeydown)
 })
 
 const showLogoutSuccess = ref(false);
@@ -58,5 +87,14 @@ async function handleLogout() {
       <NuxtPage />
     </div>
     <Footer />
+  </div>
+
+  <div v-if="globalPreviewImageUrl" class="media-preview-overlay" @click="closeGlobalPreview">
+    <img
+      :src="globalPreviewImageUrl"
+      alt="Media preview"
+      class="media-preview-image"
+      @click.stop
+    />
   </div>
 </template>
