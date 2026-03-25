@@ -1,11 +1,23 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import GoogleTranslate from "./GoogleTranslate.vue";
 import useAuth from "../../server/api/use-auth";
 
 const isDropdownOpen = ref(false);
+const headerRoot = ref(null);
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
+};
+const closeDropdown = () => {
+  isDropdownOpen.value = false;
+};
+
+const onDocumentClick = (event) => {
+  const root = headerRoot.value;
+  if (!root) return;
+  if (!root.contains(event.target)) {
+    isDropdownOpen.value = false;
+  }
 };
 
 // use shared auth composable so UI updates when other parts of the app call fetchUserData()
@@ -15,6 +27,11 @@ onMounted(async () => {
   try {
     await fetchUserData();
   } catch (_) {}
+  document.addEventListener("click", onDocumentClick);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", onDocumentClick);
 });
 
 const logout = async () => {
@@ -29,7 +46,7 @@ const logout = async () => {
 </script>
 
 <template>
-  <header class="header">
+  <header ref="headerRoot" class="header">
     <div id="Topbar">
       <div class="logo">
         <img src="/resources/nhs_logo.jpg" alt="NHS Wayfinder Logo" />
@@ -50,10 +67,10 @@ const logout = async () => {
         <li v-if="user" id="hidelink">
           <NuxtLink to="/admin/media">Media</NuxtLink>
         </li>
-        <li v-if="user" id="hidelink">
+        <li v-if="user">
           <NuxtLink to="/admin/dashboard">Dashboard</NuxtLink>
         </li>
-         <li id="hidelink" v-if="!user">
+         <li v-if="!user">
           <NuxtLink to="/login">Login</NuxtLink>
         </li>
         <li id="hidelink" v-else>
@@ -62,9 +79,8 @@ const logout = async () => {
         <li id="Morebtn" @click.prevent="toggleDropdown"><a>More</a></li>
       </ul>
     </nav>
-    <div class="dropdown" v-show="isDropdownOpen">
+    <div class="dropdown" v-show="isDropdownOpen" @click="closeDropdown">
       <ul>
-        <li v-if="!user"><a href="/login">Login</a></li>
         <li v-if="user"><a href="#" @click.prevent="logout">Logout</a></li>
         <li><NuxtLink to="/about">About</NuxtLink></li>
         <li><NuxtLink to="/contact">Contact</NuxtLink></li>
@@ -72,9 +88,6 @@ const logout = async () => {
           <NuxtLink to="/admin/bfs-debug">BFS Debug</NuxtLink>
         </li>
         <li v-if="user"><NuxtLink to="/admin/media">Media</NuxtLink></li>
-        <li v-if="user">
-          <NuxtLink to="/admin/dashboard">Dashboard</NuxtLink>
-        </li>
         <li v-if="user"><NuxtLink to="/admin/node">Add Node</NuxtLink></li>
         <li v-if="user">
           <NuxtLink to="/admin/connections">Connections</NuxtLink>

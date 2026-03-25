@@ -58,18 +58,18 @@ main {
     cursor: pointer;
 }
 
-.media-table-btn {
-    padding: 4px 8px;
-    font-size: 0.85rem;
+.table-btn {
+    padding: 6px 10px;
+    font-size: 0.9rem;
     background-color: #00662f;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: auto;
-    height: 34px;
-    min-width: 70px;
-    min-height:20px;
+    height: 36px;
+    min-width: 78px;
+    min-height:24px;
 }
 
 
@@ -81,7 +81,18 @@ main {
     align-items: flex-start;
 }
 
-.media-table-btn:hover {
+.media-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.media-table-scroll .media-data-table {
+    width: 100%;
+    min-width: 900px;
+}
+
+.table-btn:hover {
     background-color: #004620;
 }
 
@@ -255,9 +266,15 @@ input:focus {
     font-weight: 600;
 }
 
+.box-container-center .pathfinder-form-wrap {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
 .box-container-center input {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     height: 44px;
     border-radius: 0;
     box-sizing: border-box;
@@ -399,45 +416,6 @@ video.media-thumb {
   flex: 1;
 }
 
-footer {
-    display: flex;
-    justify-content: space-between;
-    background-color: #cccccc;
-    border-top: #005EB8 solid 4px;
-    color: rgb(66, 66, 66);
-    font-size: 18px;
-    margin: 0;
-    padding: 0 20% 50px 20%;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-footer ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: auto 0;
-    padding: 0;
-}
-
-footer ul li a {
-    text-decoration: none;
-    color: #003d75;
-    font-weight: bold;
-}
-
-footer ul li a:hover {
-    text-decoration: none;
-}
-
-footer ul li a:active{
-    text-decoration: none;
-    color: #ffee00;
-    font-weight: bold;
-}
-
 @media only screen and (max-width: 600px) {
     body {
         font-family: Arial, sans-serif;
@@ -456,216 +434,6 @@ footer ul li a:active{
         margin: 0 auto;
         padding: 20px;
     }
-     footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin: 50px 0 0 0;
-        padding: 20px 10%;
-        position: relative;
-    }
-
-    footer ul {
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    
-}
-
-.header{
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 18px;
-    text-decoration: none;
-    position: relative;
-    z-index: 30;
-}
-
-
-#Topbar{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    background-color: #005EB8;
-    height: 100px;
-    width: auto;
-    margin: 0 0;
-    padding: 0 20%;
-}
-
-.topbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-#Topbar img{
-    height: 35px;
-    width: auto;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-text {
-    margin: 0;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.account a{
-    text-decoration: none;
-    font-weight: bolder;
-    color: #fff;
-}
-
-.account a:hover {
-    text-decoration: underline;
-}
-
-.topbar-actions .translate-wrapper,
-.topbar-actions .translate-status {
-    color: #fff;
-}
-
-.topbar-actions .translate-target .goog-te-combo {
-    border-color: #d9e1ec;
-}
-
-#Morebtn{
-    display: none;
-}
-
-nav {
-    height: 50px;
-    display: flex;
-    position: relative;
-    z-index: 10;
-    background-color: #005EB8;
-    align-items: center;
-    font-weight: normal;
-    margin: 0 0;
-    padding: 0 20%;
-}
-
-nav ul {
-    display: flex;
-    width: 100%;
-    border-top: 1px solid #c0c0c0;
-    justify-content: space-between;
-    list-style: none;
-    font-weight: bolder;
-    margin: 0;
-    padding: 0 30px;
-}
-
-nav ul li {
-    cursor: pointer;
-    padding: 10px 0;
-    font-weight: bolder;
-    font-size: 24px;
-
-}
-
-nav ul li a {
-    color: #fff;
-    font-size: 20px;
-    font-weight: bolder;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-.dropdown {
-    display: none;
-    z-index: 35;
-}
-
-@media (max-width: 760px) {
-    #Topbar {
-        padding: 0 5%;
-        box-shadow: 0px 20px 80px -15px grey;
-    }
-
-    #account {
-        display: none;
-    }
-
-    .logo-text {
-        font-size: 18px;
-    }
-
-    #Morebtn {
-        display: block;
-        position: relative;
-        z-index: 40;
-    }
-
-    nav {
-        padding: 0 5%;
-        box-shadow: 0px 20px 80px -15px grey;
-    }
-
-    #hidelink {
-        display: none;
-    }
-
-    .dropdown {
-        display: block;
-        position: absolute;
-        top: 150px;
-        right: 0;
-        background-color: #e0e0e0;
-        width: 100%;
-        height: auto;
-        text-align: left;
-        z-index: 45;
-    }
-    
-    .dropdown ul{
-        display: block;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        color: #005EB8;
-        text-decoration: none;
-    }
-
-    .dropdown ul li {
-        display: block;
-        padding: 10px 20px;
-        font-size: 18px;
-        font-weight: bolder;
-        color: #005EB8;
-        text-decoration: none;
-    }
-
-    .dropdown ul li a {
-        display: block;
-        color: #005EB8;
-        font-size: 18px;
-        font-weight: bolder;
-        text-decoration: none;
-    }
-
-    .dropdown ul li a:hover {
-        color: #000000;
-        text-decoration: underline;
-    }
-    
-    .dropdown ul li:hover {
-        background-color: #fffb00;
-    }
-
 }
 
 .admin-links {
@@ -797,20 +565,6 @@ button:hover {
         width: 100%;
     }
 
-    footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin: 50px 0 0 0;
-        padding: 20px 10%;
-    }
-
-    footer ul {
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    
 }
 
 main {
@@ -940,7 +694,13 @@ main h2 {
 
 .box-container-center .form-group {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
+}
+
+.box-container-center .form-group input,
+.box-container-center .form-group select {
+    width: 100%;
+    max-width: 500px;
 }
 
 .box-container-center .form-group select {
@@ -953,12 +713,71 @@ main h2 {
     box-sizing: border-box;
 }
 
+.form-group select {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    font-size: 17px;
+    border: 1px solid #464646;
+    border-radius: 0;
+    box-sizing: border-box;
+}
+
+.media-page .media-select {
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 15px;
+}
+
+.media-page .media-upload-form {
+    width: min(460px, 100%);
+}
+
+.media-page .media-url-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.media-page .form-group {
+    width: min(460px, 100%);
+}
+
+.users-form {
+    width: min(380px, 100%);
+}
+
+.users-form .form-group {
+    width: 100%;
+}
+
+.media-page .form-group input,
+.media-page .form-group select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .form-group input[type="text"] {
     padding: 10px;
     font-size: 18px;
     width: 100%;
     border: 1px solid #464646;
     border-radius: 0px;
+}
+
+.media-description-group {
+    width: 100%;
+    max-width: 560px;
+}
+
+.media-description-box {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #464646;
+    border-radius: 0;
+    box-sizing: border-box;
+    resize: none;
 }
 
 .checkbox-group {
@@ -1102,6 +921,170 @@ hr {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+main {
+    width: min(1200px, calc(100% - 2rem));
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.admin-nav {
+    width: 100%;
+}
+
+.admin-nav ul {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        width: calc(100% - 1.5rem);
+        margin: 24px auto;
+        padding: 0 0.75rem;
+    }
+
+    .admin-nav ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Moved from app/pages/watch-route.vue */
+.route-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.media-nav-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.route-media-box {
+    width: min(900px, 100%);
+    margin: 0 auto 14px;
+    padding: 22px 26px;
+    box-sizing: border-box;
+    background-color: #005eb8;
+    color: #ffffff;
+    border-radius: 7px;
+}
+
+.route-media-box h2,
+.route-media-box h3,
+.route-media-box h4,
+.route-media-box p,
+.route-media-box em,
+.route-media-box small,
+.route-media-box a {
+    color: #ffffff;
+}
+
+.route-media-box a {
+    text-decoration: underline;
+}
+
+.route-nav-button {
+    width: auto;
+    min-width: 120px;
+    padding: 10px 18px;
+}
+
+.media-step-counter {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.instruction-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.instruction-text {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.5;
+}
+
+.tts-button {
+    width: auto;
+    min-width: 56px;
+    padding: 8px 12px;
+}
+
+.route-media-image {
+    display: block;
+    margin: 0 auto;
+    width: min(100%, 820px);
+    max-height: 540px;
+    object-fit: contain;
+}
+
+/* Moved from app/pages/admin/node.vue */
+.nodes-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nodes-toolbar-meta {
+    margin: 0.4rem 0;
+}
+
+.nodes-toolbar-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0.45rem 0;
+}
+
+.nodes-toolbar-button {
+    width: auto;
+    min-width: 140px;
+    padding: 0.45rem 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .route-media-box {
+        width: min(560px, 92%);
+        margin: 0 auto 14px;
+        padding: 16px;
+    }
+
+    .route-media-image {
+        width: min(100%, 460px);
+        max-height: 300px;
+    }
+
+    .media-nav-controls {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
+
+/* Final safeguard: keep form controls inside page margins across admin/user pages. */
+main .form-group input:not([type="checkbox"]):not([type="radio"]),
+main .form-group select,
+main .form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 

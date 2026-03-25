@@ -147,7 +147,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="route-page-container">
     <div>
       <h1>Selected route</h1>
 
@@ -163,12 +163,13 @@ onUnmounted(() => {
         <div>
           <div v-if="mediaList && mediaList.length" class="">
             <div>
-              <div v-if="currentMedia">
+              <div v-if="currentMedia" class="route-media-box">
                 <h2>Step {{ currentIndex + 1 }} of {{ mediaList.length }}</h2>
                 <span v-if="isImageType(currentMedia)">
                   <img
                     :src="currentMedia.media_url"
                     alt="media"
+                    class="route-media-image"
                   />
                 </span>
                 <span v-else-if="isVideoType(currentMedia)">
@@ -183,30 +184,32 @@ onUnmounted(() => {
                   >
                 </span>
                 <h4>Instructions:</h4>
-                <div v-if="currentMedia.content_desc">
-                  <em>{{ currentMedia.content_desc }}</em>
+                <div v-if="currentMedia.content_desc" class="instruction-block">
+                  <em class="instruction-text">{{ currentMedia.content_desc }}</em>
                   <button
+                    class="tts-button"
                     @click="speakDescription(currentMedia.content_desc)"
                     title="Read description"
                   >
-                    🔊
+                    🔊 Read out the direction
                   </button>
                 </div>
               </div>
 
-              <div>
-                <button v-if="currentIndex > 0" @click="prevMedia">
+              <div class="media-nav-controls">
+                <button v-if="currentIndex > 0" @click="prevMedia" class="route-nav-button">
                   Previous
                 </button>
 
                 <button
+                  class="route-nav-button"
                   @click="nextMedia"
                   :disabled="currentIndex >= mediaList.length - 1"
                 >
                   Next
                 </button>
               </div>
-              <span
+              <span class="media-step-counter"
                 >({{ currentIndex + 1 }} / {{ mediaList.length }})</span
               >
             </div>
@@ -233,12 +236,13 @@ onUnmounted(() => {
         <div v-if="mediaList && mediaList.length" class="">
           <h3>Media</h3>
           <div>
-            <div v-if="currentMedia">
+            <div v-if="currentMedia" class="route-media-box">
               <h4>Step {{ currentIndex + 1 }} of {{ mediaList.length }}</h4>
               <span v-if="isImageType(currentMedia)">
                 <img
                   :src="currentMedia.media_url"
                   alt="media"
+                  class="route-media-image"
                 />
               </span>
               <span v-else-if="isVideoType(currentMedia)">
@@ -260,31 +264,31 @@ onUnmounted(() => {
                     : ""
                 }})</small
               >
-              <div
-                v-if="currentMedia.content_desc"
-              >
-                <p>{{ currentMedia.content_desc }}</p>
+              <div v-if="currentMedia.content_desc" class="instruction-block">
+                <p class="instruction-text">{{ currentMedia.content_desc }}</p>
                 <button
+                  class="tts-button"
                   @click="speakDescription(currentMedia.content_desc)"
                   title="Read description"
                 >
-                  🔊
+                  🔊 Read out the direction
                 </button>
               </div>
             </div>
 
-            <div>
-              <button v-if="currentIndex > 0" @click="prevMedia">
+            <div class="media-nav-controls">
+              <button v-if="currentIndex > 0" @click="prevMedia" class="route-nav-button">
                 Previous
               </button>
-              <span>{{ currentIndex + 1 }} / {{ mediaList.length }}</span>
               <button
+                class="route-nav-button"
                 @click="nextMedia"
                 :disabled="currentIndex >= mediaList.length - 1"
               >
                 Next
               </button>
             </div>
+            <span class="media-step-counter">{{ currentIndex + 1 }} / {{ mediaList.length }}</span>
           </div>
         </div>
         <div v-else>

@@ -170,13 +170,13 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 </script>
 
 <template>
-  <main>
+  <main class="media-page">
     <div>
       <h1>Media management</h1>
 
       <section>
         <h2>Upload media</h2>
-        <form @submit.prevent="submitUpload">
+        <form @submit.prevent="submitUpload" class="media-upload-form">
           <div>
             <label>
               <input type="radio" v-model="useFile" :value="false" /> Use link
@@ -189,7 +189,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
           <div>
             <div v-if="!useFile">
               <label for="media">Media link (URL):</label>
-              <input id="media" name="media" type="url" v-model="uploadForm.media" required />
+              <input id="media" name="media" type="url" v-model="uploadForm.media" class="media-url-input" required />
             </div>
 
             <div v-else>
@@ -219,7 +219,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 
           <div class="form-group">
             <label>From node</label>
-            <select v-model="connection_node_1">
+            <select v-model="connection_node_1" class="media-select">
               <option :value="null">-- select --</option>
               <option v-for="n in filteredNodes" :key="n.node_id" :value="n.node_id">{{ n.node_name }} ({{ n.node_id }})</option>
             </select>
@@ -227,7 +227,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 
           <div class="form-group">
             <label>To node</label>
-            <select v-model="connection_node_2">
+            <select v-model="connection_node_2" class="media-select">
               <option :value="null">-- select --</option>
               <option v-for="n in filteredNodes" :key="n.node_id + '-to'" :value="n.node_id">{{ n.node_name }} ({{ n.node_id }})</option>
             </select>
@@ -242,7 +242,7 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 
           <div class="form-group">
             <label>Media</label>
-            <select v-model="media_id">
+            <select v-model="media_id" class="media-select">
               <option :value="null">-- select --</option>
               <option v-for="m in filteredMedia" :key="m.media_id" :value="m.media_id">{{ m.media_name || displayMediaUrl(m.media_url) }} — {{ m.media_id }}</option>
             </select>
@@ -270,9 +270,14 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
             <label style="display:block"><input type="checkbox" v-model="wheelchair_accessible" /> Is wheelchair accessible</label>
           </div>
 
-          <div class="form-group">
+          <div class="form-group media-description-group">
             <label>Media description (optional)</label>
-            <textarea v-model="content_desc" rows="2" placeholder="Short description for this media on the connection"></textarea>
+            <textarea
+              v-model="content_desc"
+              class="media-description-box"
+              rows="4"
+              placeholder="Short description for this media on the connection"
+            ></textarea>
           </div>
 
           <p v-if="assignMessage">{{ assignMessage }}</p>
@@ -294,40 +299,44 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
       <div v-if="error">Error loading media.</div>
       <div v-else-if="pending">Loading...</div>
       <div v-else>
-        <table v-if="media && media.length" class="styled-table">
-          <thead>
-            <tr>
-              <th v-for="col in columns" :key="col">{{ col }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(mediaItem, idx) in media" :key="idx">
-              <td v-for="col in columns" :key="col">
-                <template v-if="col === 'media_url'">
-                  <a :href="mediaItem[col]" target="_blank">{{ mediaItem.media_name || displayMediaUrl(mediaItem[col]) }}</a>
-                </template>
-                <template v-else>
-                  {{ mediaItem[col] }}
-                </template>
-              </td>
-              <td>
-                <img
-                  v-if="mediaItem && isImageType(mediaItem)"
-                  :src="mediaItem.media_url"
-                  alt="Media"
-                  class="media-thumb media-thumb-hover"
-                  @click="openGlobalMediaPreview(mediaItem.media_url)"
-                />
-                <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
-                <span v-else>—</span>
-              </td>
-              <td class="media-actions-cell">
-                <button class="media-table-btn" @click="renameMedia(mediaItem.media_id)">Rename</button>
-                <button class="media-table-btn" @click="deleteMedia(mediaItem.media_url)">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div v-if="media && media.length" class="media-table-scroll">
+          <table class="styled-table media-data-table">
+            <thead>
+              <tr>
+                <th v-for="col in columns" :key="col">{{ col }}</th>
+                <th>preview</th>
+                <th>actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(mediaItem, idx) in media" :key="idx">
+                <td v-for="col in columns" :key="col">
+                  <template v-if="col === 'media_url'">
+                    <a :href="mediaItem[col]" target="_blank">{{ mediaItem.media_name || displayMediaUrl(mediaItem[col]) }}</a>
+                  </template>
+                  <template v-else>
+                    {{ mediaItem[col] }}
+                  </template>
+                </td>
+                <td>
+                  <img
+                    v-if="mediaItem && isImageType(mediaItem)"
+                    :src="mediaItem.media_url"
+                    alt="Media"
+                    class="media-thumb media-thumb-hover"
+                    @click="openGlobalMediaPreview(mediaItem.media_url)"
+                  />
+                  <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
+                  <span v-else>—</span>
+                </td>
+                <td class="media-actions-cell">
+                  <button class="table-btn" @click="renameMedia(mediaItem.media_id)">Rename</button>
+                  <button class="table-btn" @click="deleteMedia(mediaItem.media_url)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div v-else>No media found.</div>
       </div>
     </div>

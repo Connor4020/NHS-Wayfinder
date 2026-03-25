@@ -14,6 +14,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-  css: ['./public/css/style.css']
+  css: ['./public/css/style.css', './public/css/header.css', './public/css/footer.css']
   
 })
