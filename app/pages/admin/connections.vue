@@ -251,6 +251,7 @@ const connectionsShowingCount = computed(() => filteredConnections.value.length)
             <span>Page {{ connectionsPage }} / {{ connectionsTotalPages }}</span>
         </div>
 
+<<<<<<< HEAD
 
         <div class="table-container">
             <div v-if="pending">Loading connections…</div>
@@ -338,4 +339,105 @@ const connectionsShowingCount = computed(() => filteredConnections.value.length)
             <p v-if="connections && connections.length === 0">No connections found.</p>
         </div>
     </main>
+=======
+        <div v-if="pending">Loading connections…</div>
+        <div v-else-if="error">Error loading connections</div>
+        <table v-else class="styled-table">
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Wheelchair accessible</th>
+                    <th>Media (drag rows to reorder)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="c in filteredConnections" :key="c.node_1 + '-' + c.node_2">
+                    <td>
+                        <NuxtLink :to="{ path: '/watch-route', query: { node_1: c.node_1, node_2: c.node_2 } }">
+                            {{ nodeLabel(c.node_1) }} ({{ c.node_1 }})
+                        </NuxtLink>
+                    </td>
+                    <td>{{ nodeLabel(c.node_2) }} ({{ c.node_2 }})</td>
+                    <td>
+                        <label>
+                            <input
+                                type="checkbox"
+                                :checked="!!c.wheelchair_accessible"
+                                :disabled="updatingAccessibility || deleting || reordering"
+                                @change="updateWheelchairAccessible(c.node_1, c.node_2, ($event.target as HTMLInputElement).checked)"
+                            />
+                            {{ c.wheelchair_accessible ? 'Yes' : 'No' }}
+                        </label>
+                    </td>
+                    <td>
+                        <table v-if="c.media && c.media.length" class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>Drag</th>
+                                    <th>Order</th>
+                                    <th>Media</th>
+                                    <th>Description</th>
+                                    <th>Media actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="m in sortedConnectionMedia(c)"
+                                    :key="m.media_id + '-' + m.order_num"
+                                    draggable="true"
+                                    @dragstart="onMediaDragStart(c, m, $event)"
+                                    @dragover="onMediaDragOver(c, $event)"
+                                    @drop="onMediaDrop(c, m, $event)"
+                                    @dragend="onMediaDragEnd"
+                                >
+                                    <td title="Drag to reorder" aria-label="Drag to reorder">☰</td>
+                                    <td>{{ m.order_num || '-' }}</td>
+                                    <td>
+                                        <span v-if="isImageType(m)">
+                                            <img
+                                                :src="m.media_url"
+                                                alt="media"
+                                                class="media-thumb media-thumb-hover"
+                                                draggable="false"
+                                                @dragstart.prevent
+                                                @mousedown.stop
+                                                @click.stop="openGlobalMediaPreview(m.media_url)"
+                                            />
+                                        </span>
+                                        <span v-else-if="isVideoType(m)">
+                                            <video
+                                                :src="m.media_url"
+                                                controls
+                                                class="media-thumb"
+                                                draggable="false"
+                                                @dragstart.prevent
+                                                @mousedown.stop
+                                                @click.stop="openGlobalMediaPreview(m.media_url, 'video')"
+                                            ></video>
+                                        </span>
+                                        <span v-else>
+                                            <a :href="m.media_url" target="_blank">Open media {{ m.media_id }}</a>
+                                        </span>
+                                    </td>
+                                    <td>{{ m.content_desc || '—' }}</td>
+                                    <td>
+                                        <button :disabled="deleting || reordering" @click="deleteConnectionMedia(c.node_1, c.node_2, m.media_id)">Delete media</button>
+                                        <button :disabled="deleting || reordering" @click="editConnectionMediaDesc(c.node_1, c.node_2, m.media_id, m.content_desc)">Edit description</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span v-else>No media assigned.</span>
+                    </td>
+                    <td>
+                        <button :disabled="deleting" @click="deleteConnection(c.node_1, c.node_2)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p v-if="connections && connections.length === 0">No connections found.</p>
+    </div>
+>>>>>>> 6994fe741dda2d97f1ef5ff6bd6196eeb9d9844b
 </template>
