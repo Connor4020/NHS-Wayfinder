@@ -16,12 +16,11 @@ async function deleteMedia(media_url) {
 }
 
 async function renameMedia(mediaId) {
-  const newName = prompt('Enter display name for this media (keeps original URL):')
+  const newName = prompt('Enter display name for this media')
   if (!newName) return
   try {
     await $fetch('/api/media/name', { method: 'POST', body: { media_id: Number(mediaId), media_name: String(newName).trim() } })
     if (typeof refreshMedia === 'function') await refreshMedia()
-    alert('Display name updated')
   } catch (err) {
     console.error(err)
     alert('Failed to update display name: ' + (err?.data?.statusMessage || err?.message || err))
