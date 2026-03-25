@@ -123,22 +123,21 @@ const updateConnectionAccessibility = async (n1, n2, nextValue) => {
 </script>
 
 <template>
+  <main>
 
 
   <div>
-    <AdminBackButton />
       <div>
     <h1>node management</h1>
   </div>
     <h1>Add Node</h1>
-    <div>
+    <div class="form-group">
       <label>Node name</label>
       <input v-model="node_name" placeholder="e.g. Entrance A" maxlength="100" />
       <small>{{ node_name.length }}/100</small>
     </div>
     <div>
       <button :disabled="loading || !valid" @click="submit">Create Node</button>
-      <NuxtLink to="/admin/media">Assign media</NuxtLink>
     </div>
   </div>
 
@@ -149,9 +148,11 @@ const updateConnectionAccessibility = async (n1, n2, nextValue) => {
     <div v-else>
       <div>
         <span>Showing {{ nodesShowingCount }} / {{ nodesTotal }} nodes</span>
-        <button :disabled="!nodesHasPrev || pendingNodes" @click="prevNodesPage">Previous page</button>
-        <button :disabled="!nodesHasNext || pendingNodes" @click="nextNodesPage">Next page</button>
-        <button :disabled="pendingNodes" @click="refreshNodes">Refresh</button>
+        <div>
+          <button :disabled="!nodesHasPrev || pendingNodes" @click="prevNodesPage">Previous page</button>
+          <button :disabled="!nodesHasNext || pendingNodes" @click="nextNodesPage">Next page</button>
+          <button :disabled="pendingNodes" @click="refreshNodes">Refresh</button>
+        </div>
         <span>Page {{ nodesPage }} / {{ nodesTotalPages }}</span>
       </div>
     <table class="styled-table">
@@ -213,5 +214,5 @@ const updateConnectionAccessibility = async (n1, n2, nextValue) => {
     </table>
     </div>
   </div>
-
+</main>
 </template>
