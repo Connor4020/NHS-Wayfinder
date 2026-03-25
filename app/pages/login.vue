@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import useAuth from "../../server/api/use-auth";
-import "../public/css/login.css";
 
 const router = useRouter();
 const username = ref("");

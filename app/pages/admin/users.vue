@@ -48,12 +48,6 @@ async function submit() {
 
 const { data: users, pending, refresh: refreshUsers } = await useFetch('/api/users')
 const columns2 = computed(() => (users?.value?.length ? Object.keys(users.value[0]) : []))
-
-useHead({
-  link: [
-    { rel: 'stylesheet', href: '/css/style.css' }
-  ]
-})
 </script>
 
 
