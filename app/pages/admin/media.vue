@@ -1,6 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import useMediaChecks from '../../../composables/useMediaChecks'
+import useGlobalMediaPreview from '../../../composables/useGlobalMediaPreview'
 
 
 async function deleteMedia(media_url) {
@@ -165,6 +166,7 @@ const submitAssign = async () => {
 const { data: media1, pending, error } = await useFetch('/api/media')
 const columns = computed(() => (media?.value?.length ? Object.keys(media.value[0]) : []))
 
+const { openGlobalMediaPreview } = useGlobalMediaPreview()
 const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
 </script>
 
@@ -250,10 +252,15 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
           <div v-if="selectedMediaObj">
             <h4>Preview</h4>
             <div v-if="isImageType(selectedMediaObj)">
-              <img :src="selectedMediaObj.media_url" alt="preview" style="max-width:300px; max-height:200px" />
+              <img
+                :src="selectedMediaObj.media_url"
+                alt="preview"
+                class="media-thumb media-thumb-hover"
+                @click="openGlobalMediaPreview(selectedMediaObj.media_url)"
+              />
             </div>
             <div v-else-if="isVideoType(selectedMediaObj)">
-              <video :src="selectedMediaObj.media_url" controls style="max-width:300px; max-height:200px"></video>
+              <video :src="selectedMediaObj.media_url" controls class="media-thumb"></video>
             </div>
             <div v-else>
               <a :href="selectedMediaObj.media_url" target="_blank">Open media</a>
@@ -299,14 +306,23 @@ const { displayMediaUrl, isImageType, isVideoType } = useMediaChecks()
             <tr v-for="(mediaItem, idx) in media" :key="idx">
               <td v-for="col in columns" :key="col">
                 <template v-if="col === 'media_url'">
-                  <a :href="mediaItem[col]">{{ mediaItem.media_name || displayMediaUrl(mediaItem[col]) }}</a>
+                  <a :href="mediaItem[col]" target="_blank">{{ mediaItem.media_name || displayMediaUrl(mediaItem[col]) }}</a>
                 </template>
                 <template v-else>
                   {{ mediaItem[col] }}
                 </template>
               </td>
-              <img v-if="mediaItem && isImageType(mediaItem)" :src="mediaItem.media_url" alt="Media" class="media-thumb" />
-              <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
+              <td>
+                <img
+                  v-if="mediaItem && isImageType(mediaItem)"
+                  :src="mediaItem.media_url"
+                  alt="Media"
+                  class="media-thumb media-thumb-hover"
+                  @click="openGlobalMediaPreview(mediaItem.media_url)"
+                />
+                <video v-else-if="mediaItem && isVideoType(mediaItem)" :src="mediaItem.media_url" controls class="media-thumb"></video>
+                <span v-else>—</span>
+              </td>
               <td>
                 <button @click="renameMedia(mediaItem.media_id)" style="margin-right:8px">Rename</button>
                 <button @click="deleteMedia(mediaItem.media_url)">Delete</button>

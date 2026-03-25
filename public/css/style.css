@@ -320,6 +320,45 @@ input:focus {
     font-style: italic;
 }
 
+.media-thumb {
+    max-width: 120px;
+    max-height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+video.media-thumb {
+    object-fit: contain;
+    background: #000;
+}
+
+.media-thumb-hover {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.media-thumb-hover:hover {
+    transform: scale(1.05);
+}
+
+.media-preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 24px;
+}
+
+.media-preview-image {
+    max-width: min(90vw, 1200px);
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
 .app-layout {
   min-height: 100vh;
   display: flex;

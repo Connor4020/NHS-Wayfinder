@@ -315,7 +315,15 @@ const connectionsShowingCount = computed(() => filteredConnections.value.length)
                                             />
                                         </span>
                                         <span v-else-if="isVideoType(m)">
-                                            <video :src="m.media_url" controls class="media-thumb" draggable="false" @dragstart.prevent></video>
+                                            <video
+                                                :src="m.media_url"
+                                                controls
+                                                class="media-thumb"
+                                                draggable="false"
+                                                @dragstart.prevent
+                                                @mousedown.stop
+                                                @click.stop="openGlobalMediaPreview(m.media_url, 'video')"
+                                            ></video>
                                         </span>
                                         <span v-else>
                                             <a :href="m.media_url" target="_blank">Open media {{ m.media_id }}</a>
