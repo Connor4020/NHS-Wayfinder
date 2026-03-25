@@ -1,5 +1,4 @@
 <script setup>
-import "../public/css/header.css";
 import { ref, computed, onMounted } from "vue";
 import GoogleTranslate from "./GoogleTranslate.vue";
 import useAuth from "../../server/api/use-auth";
