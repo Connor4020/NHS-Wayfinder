@@ -1,17 +1,19 @@
 <script setup>
 import { ref } from "vue";
 import useAuth from "../../server/api/use-auth";
-import "../public/css/login.css";
 
 const router = useRouter();
 const username = ref("");
 const password = ref("");
 const message = ref("");
+const isError = ref(false);
+const showPassword = ref(false);
 
 const { fetchUserData } = useAuth();
 
 const loginUser = async () => {
   message.value = "";
+  isError.value = false;
   try {
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -23,7 +25,10 @@ const loginUser = async () => {
     });
 
     if (!res.ok) {
-      message.value = "Login failed: wrong credentials or server error.";
+      message.value =
+        "Login failed: Incorrect username or password, please try again";
+      isError.value = true;
+      password.value = "";
       return;
     }
 
@@ -31,10 +36,13 @@ const loginUser = async () => {
     try {
       await fetchUserData();
     } catch (_) {}
-    message.value = "Login successful!";
+    isError.value = false;
     router.push("/admin/dashboard");
   } catch (err) {
-    message.value = "Login failed: wrong credentials or server error.";
+    message.value =
+      "Login failed: Incorrect username or password, please try again";
+    isError.value = true;
+    password.value = "";
   }
 };
 </script>
@@ -58,15 +66,32 @@ const loginUser = async () => {
         <label for="password">Password:</label>
         <input
           v-model="password"
-          type="password"
+          :type="showPassword ? 'text' : 'password'"
           id="password"
           name="password"
           required
         />
       </div>
+      <div>
+        <input v-model="showPassword" type="checkbox" id="show-password" />
+        <label for="show-password">Show password</label>
+      </div>
 
       <button type="submit" id="textbox-enter">Login</button>
     </form>
-    <div class="message" v-if="message">{{ message }}</div>
+    <div class="message" :class="{ 'login-error': isError }" v-if="message">
+      {{ message }}
+    </div>
   </main>
 </template>
+
+<style scoped>
+.message {
+  margin-top: 12px;
+}
+
+.login-error {
+  color: #d32f2f;
+  font-size: 16px;
+}
+</style>

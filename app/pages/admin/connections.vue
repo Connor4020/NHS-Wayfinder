@@ -257,6 +257,7 @@ const connectionsShowingCount = computed(() => filteredConnections.value.length)
             <span>Page {{ connectionsPage }} / {{ connectionsTotalPages }}</span>
         </div>
 
+        <div class="table-container">
             <div v-if="pending">Loading connections…</div>
             <div v-else-if="error">Error loading connections</div>
 
@@ -340,5 +341,6 @@ const connectionsShowingCount = computed(() => filteredConnections.value.length)
                 </tbody>
             </table>
             <p v-if="connections && connections.length === 0">No connections found.</p>
+        </div>
     </main>
 </template>

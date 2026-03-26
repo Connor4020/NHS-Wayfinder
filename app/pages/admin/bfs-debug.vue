@@ -55,7 +55,6 @@
 <script>
 import { bfsShortestPath } from "@/../util/bfs";
 import { createGraph } from "@/../util/graph";
-import "../public/css/bfs-debug.css";
 
 export default {
   data() {

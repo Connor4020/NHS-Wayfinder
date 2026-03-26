@@ -146,29 +146,31 @@ const updateConnectionAccessibility = async (n1, n2, nextValue) => {
     <div v-if="errorNodes">Error loading nodes.</div>
     <div v-else-if="pendingNodes">Loading…</div>
     <div v-else>
-      <div>
-        <span>Showing {{ nodesShowingCount }} / {{ nodesTotal }} nodes</span>
-        <div>
-          <button :disabled="!nodesHasPrev || pendingNodes" @click="prevNodesPage">Previous page</button>
-          <button :disabled="!nodesHasNext || pendingNodes" @click="nextNodesPage">Next page</button>
-          <button :disabled="pendingNodes" @click="refreshNodes">Refresh</button>
+      <div class="nodes-toolbar">
+        <span class="nodes-toolbar-meta">Showing {{ nodesShowingCount }} / {{ nodesTotal }} nodes</span>
+        <div class="nodes-toolbar-buttons">
+          <button class="nodes-toolbar-button" :disabled="!nodesHasPrev || pendingNodes" @click="prevNodesPage">Previous page</button>
+          <button class="nodes-toolbar-button" :disabled="!nodesHasNext || pendingNodes" @click="nextNodesPage">Next page</button>
+          <button class="nodes-toolbar-button" :disabled="pendingNodes" @click="refreshNodes">Refresh</button>
         </div>
-        <span>Page {{ nodesPage }} / {{ nodesTotalPages }}</span>
+        <span class="nodes-toolbar-meta">Page {{ nodesPage }} / {{ nodesTotalPages }}</span>
       </div>
-    <table class="styled-table">
-      <thead>
-        <tr>
-          <th>Node name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="loc in locations" :key="loc.node_id">
-          <td>{{ loc.node_name }}</td>
-          <td><button @click="deleteNode(loc.node_id)" :disabled="deleting">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="media-table-scroll">
+      <table class="styled-table media-data-table">
+        <thead>
+          <tr>
+            <th>Node name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="loc in locations" :key="loc.node_id">
+            <td>{{ loc.node_name }}</td>
+            <td><button class="nodes-toolbar-button" @click="deleteNode(loc.node_id)" :disabled="deleting">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     </div>
   </div>
 
@@ -177,41 +179,45 @@ const updateConnectionAccessibility = async (n1, n2, nextValue) => {
     <div v-if="errorConnections">Error loading connections.</div>
     <div v-else-if="pendingConnections">Loading…</div>
     <div v-else>
-      <div>
-        <span>Showing {{ connectionsShowingCount }} / {{ connectionsTotal }} connections</span>
-        <button :disabled="!connectionsHasPrev || pendingConnections" @click="prevConnectionsPage">Previous page</button>
-        <button :disabled="!connectionsHasNext || pendingConnections" @click="nextConnectionsPage">Next page</button>
-        <button :disabled="pendingConnections" @click="refreshConnections">Refresh</button>
-        <span>Page {{ connectionsPage }} / {{ connectionsTotalPages }}</span>
+      <div class="nodes-toolbar">
+        <span class="nodes-toolbar-meta">Showing {{ connectionsShowingCount }} / {{ connectionsTotal }} connections</span>
+        <div class="nodes-toolbar-buttons">
+          <button class="nodes-toolbar-button" :disabled="!connectionsHasPrev || pendingConnections" @click="prevConnectionsPage">Previous page</button>
+          <button class="nodes-toolbar-button" :disabled="!connectionsHasNext || pendingConnections" @click="nextConnectionsPage">Next page</button>
+          <button class="nodes-toolbar-button" :disabled="pendingConnections" @click="refreshConnections">Refresh</button>
+        </div>
+        <span class="nodes-toolbar-meta">Page {{ connectionsPage }} / {{ connectionsTotalPages }}</span>
       </div>
-    <table class="styled-table">
-      <thead>
-        <tr>
-          <th>From</th>
-          <th>To</th>
-          <th>Wheelchair accessible</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="c in connections" :key="`${c.node_1}-${c.node_2}`">
-          <td>{{ nodeLabel(c.node_1) }}</td>
-          <td>{{ nodeLabel(c.node_2) }}</td>
-          <td>
-            <label>
-              <input
-                type="checkbox"
-                :checked="!!c.wheelchair_accessible"
-                :disabled="updatingAccessibility || deleting"
-                @change="updateConnectionAccessibility(c.node_1, c.node_2, ($event.target).checked)"
-              />
-              wheelchair accessible
-            </label>
-          </td>
-          <td><button @click="deleteConnection(c.node_1, c.node_2)" :disabled="deleting">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="media-table-scroll">
+      <table class="styled-table media-data-table">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Wheelchair accessible</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="c in connections" :key="`${c.node_1}-${c.node_2}`">
+            <td>{{ nodeLabel(c.node_1) }}</td>
+            <td>{{ nodeLabel(c.node_2) }}</td>
+            <td>
+              <label>
+                <input
+                  type="checkbox"
+                  :checked="!!c.wheelchair_accessible"
+                  :disabled="updatingAccessibility || deleting"
+                  @change="updateConnectionAccessibility(c.node_1, c.node_2, ($event.target).checked)"
+                />
+                wheelchair accessible
+              </label>
+            </td>
+            <td><button class="nodes-toolbar-button" @click="deleteConnection(c.node_1, c.node_2)" :disabled="deleting">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     </div>
   </div>
 </main>

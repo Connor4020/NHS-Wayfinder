@@ -1,46 +1,27 @@
 <template>
   <main>
     <div>
-      <h1>Contact</h1>
+      <h1>About</h1>
       <p></p>
     </div>
 
     <article>
-      <ul>
-        <li>
-          <div>
-            <div>
-              <h2>
-                <p>Northern General Hospital Phone Number</p>
-              </h2>
-              <div>
-                <p>0114 243 4343</p>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
+      <div class="contact-info-box">
+        <h2>Northern General Hospital Phone Number</h2>
 
-      <ul>
-        <li>
-          <div>
-            <div>
-              <h2>
-                <p></p>
-                Northern General Hospital Website
-              </h2>
-              <div>
-                <a
-                  href="https://www.sth.nhs.uk/find-hospitals-and-services/northern-general-hospital/"
-                  >https://www.sth.nhs.uk/find-hospitals-and-services/northern-general-hospital/</a
-                >
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
+        <p>0114 243 4343</p>
+      </div>
+      <hr />
+      <div class="contact-info-box">
+        <h2>Northern General Hospital Website</h2>
 
-      <div></div>
+        <p>
+          <a
+            href="https://www.sth.nhs.uk/find-hospitals-and-services/northern-general-hospital/"
+            >https://www.sth.nhs.uk/find-hospitals-and-services/northern-general-hospital/</a
+          >
+        </p>
+      </div>
     </article>
   </main>
 </template>
