@@ -134,6 +134,17 @@ const nextMedia = () => {
 
 const instructionTextEl = ref(null);
 
+
+const printPage = () => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.print();
+  } catch (e) {
+    console.error('Print failed', e);
+  }
+};
+
+
 const getPreferredSpeechLang = () => {
   if (typeof document === "undefined") return "en-GB";
 
@@ -178,8 +189,9 @@ onUnmounted(() => {
   <div class="route-page-container">
     <div>
       <h1>Selected route</h1>
-      <div style="margin-top:8px">
+      <div class="no-print" style="margin-top:8px; display:flex; gap:8px; align-items:center">
         <QrExport :text="pageUrl" />
+        <button @click="printPage">Print / Save PDF</button>
       </div>
 
       <p v-if="connectionsPending || nodesPending">Loading route...</p>
@@ -231,9 +243,8 @@ onUnmounted(() => {
                 <button v-if="currentIndex > 0" @click="prevMedia" class="route-nav-button">
                   Previous
                 </button>
-
                 <button
-                  class="route-nav-button"
+                  class="route-nav-button no-print"
                   @click="nextMedia"
                   :disabled="currentIndex >= mediaList.length - 1"
                 >
@@ -247,6 +258,28 @@ onUnmounted(() => {
           </div>
           <div v-else>
             <p>No media assigned across this route chain.</p>
+          </div>
+        </div>
+        <!-- Print-only full steps: when printing, show every step on its own page -->
+        <div class="print-only" v-if="mediaList && mediaList.length">
+          <h2>Full route steps</h2>
+          <div v-for="(m, idx) in mediaList" :key="m.media_id || idx" class="print-step">
+            <h3>Step {{ idx + 1 }} of {{ mediaList.length }} — {{ (nodesMap[m.__node_1] || nodesMap[m.node_1] || m.__node_1 || m.node_1) }} → {{ (nodesMap[m.__node_2] || nodesMap[m.node_2] || m.__node_2 || m.node_2) }}</h3>
+            <div v-if="isImageType(m)">
+              <img :src="m.media_url" alt="media" class="route-media-image" />
+            </div>
+            <div v-else-if="isVideoType(m)">
+              <!-- For printing we show the video poster as a link -->
+              <a :href="m.media_url" target="_blank">Open media (video)</a>
+            </div>
+            <div v-else>
+              <a :href="m.media_url" target="_blank">Open media</a>
+            </div>
+            <div class="print-instruction">
+              <p v-if="m.content_desc">{{ m.content_desc }}</p>
+              <p v-else class="muted">No instructions provided.</p>
+            </div>
+            <hr />
           </div>
         </div>
       </div>
@@ -331,3 +364,5 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+

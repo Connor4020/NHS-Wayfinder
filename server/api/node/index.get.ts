@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
         const wantsPaging = query.limit !== undefined || query.offset !== undefined
 
         if (!wantsPaging) {
-            const [rows] = await pool.query('SELECT * FROM node')
+            const [rows] = await pool.query('SELECT * FROM node ORDER BY node_name')
             return rows
         }
 
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
         const total = Number((countRows as any[])[0]?.total || 0)
 
         const [rows] = await pool.query(
-            'SELECT * FROM node ORDER BY node_id LIMIT ? OFFSET ?',
+            'SELECT * FROM node ORDER BY node_name LIMIT ? OFFSET ?',
             [limit, offset]
         )
 

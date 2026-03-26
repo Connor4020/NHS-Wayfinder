@@ -1437,3 +1437,19 @@ footer ul li a:active{
     margin-bottom: 10px;
   }
 }
+
+
+/* Print styles: hide interactive controls and make media/images print-friendly */
+@media print {
+  .no-print { display: none !important; }
+  /* Show the print-only block and hide the interactive single-step UI */
+  .print-only { display: block !important; }
+  .route-media-box { display: none !important; }
+  .route-media-image { max-width: 100% !important; height: auto !important; }
+  .instruction-text { font-size: 14pt !important; }
+  .media-step-counter, .media-nav-controls { display: none !important; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* default: hide print-only block in normal view */
+.print-only { display: none; }
