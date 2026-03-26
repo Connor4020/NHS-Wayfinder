@@ -1,5 +1,3 @@
-/* DO NOT SPLIT THIS UP INTO MULTIPLE FILES! This is the main stylesheet for the entire project. im talking to you ANDY*/
-
 main {
   display: flex;
   flex-direction: column;
@@ -286,9 +284,30 @@ input:focus {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.box-container-center input {
+.box-container-center .pathfinder-form-wrap h2 {
+  width: 100%;
+  margin: 10px 0 12px;
+  text-align: left;
+}
+
+.box-container-center .pathfinder-form-wrap .form-group {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.box-container-center .pathfinder-form-wrap .form-group label {
+  display: block;
+  width: 100%;
+  margin: 0 0 8px;
+  text-align: left;
+}
+
+.box-container-center .pathfinder-form-wrap input {
   width: 100%;
   max-width: 500px;
   height: 44px;
@@ -305,13 +324,14 @@ input:focus {
 
 .IndexCheckbox-group {
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin: 2px 0 12px;
 }
 
 .IndexCheckbox-group label {
@@ -319,8 +339,8 @@ input:focus {
   align-items: center;
   gap: 8px;
   font-size: 20px;
-  font-weight: 600;
-  margin: 5px;
+  font-weight: 700;
+  margin: 0;
   color: #ffffff;
 }
 
@@ -328,6 +348,7 @@ input:focus {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .box-container-center .button {
@@ -570,6 +591,12 @@ button {
   width: 50%;
 }
 
+.box-container-center .pathfinder-form-wrap button {
+  width: 100%;
+  max-width: 300px;
+  align-self: center;
+}
+
 button:hover {
   background-color: #005622;
 }
@@ -658,6 +685,7 @@ main h1 {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
   cursor: default;
 }
+
 
 @media screen and (max-width: 768px) {
   main {
@@ -1264,6 +1292,7 @@ footer ul li a:active{
   color: #ffee00;
   font-weight: bold;
 }
+
 
 @media only screen and (max-width: 600px) {
   footer {

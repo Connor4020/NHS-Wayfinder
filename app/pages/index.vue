@@ -15,8 +15,8 @@ export default {
       graph: {},
       nodes: [],
       connections: [],
-      startNode: "",
-      targetNode: "",
+      startInput: "",
+      targetInput: "",
       accessible: false,
       shortestPath: null,
       searched: false,
@@ -42,8 +42,42 @@ export default {
   },
 
   methods: {
+    locationLabel(node) {
+      return `${node.node_name} (${node.node_id})`;
+    },
+    resolveNodeId(rawValue) {
+      const normalized = String(rawValue || "").trim().toLowerCase();
+      if (!normalized) return "";
+
+      const byId = this.nodes.find(
+        (n) => String(n.node_id).toLowerCase() === normalized,
+      );
+      if (byId) return String(byId.node_id);
+
+      const byLabel = this.nodes.find(
+        (n) => this.locationLabel(n).toLowerCase() === normalized,
+      );
+      if (byLabel) return String(byLabel.node_id);
+
+      const exactNameMatches = this.nodes.filter(
+        (n) => String(n.node_name || "").trim().toLowerCase() === normalized,
+      );
+      if (exactNameMatches.length === 1) {
+        return String(exactNameMatches[0].node_id);
+      }
+
+      const startsWithMatch = this.nodes.find(
+        (n) =>
+          this.locationLabel(n).toLowerCase().startsWith(normalized) ||
+          String(n.node_name || "").toLowerCase().startsWith(normalized),
+      );
+      return startsWithMatch ? String(startsWithMatch.node_id) : "";
+    },
     runBFS() {
-      if (!this.startNode || !this.targetNode) {
+      const startNode = this.resolveNodeId(this.startInput);
+      const targetNode = this.resolveNodeId(this.targetInput);
+
+      if (!startNode || !targetNode) {
         this.shortestPath = null;
         this.searched = true;
         return;
@@ -51,8 +85,8 @@ export default {
       this.graph = createGraph(this.nodes, this.connections);
       this.shortestPath = bfsShortestPath(
         this.graph,
-        String(this.startNode),
-        String(this.targetNode),
+        String(startNode),
+        String(targetNode),
         this.accessible,
       );
 
@@ -81,35 +115,31 @@ export default {
     </div>
 
     <div class="box-container-center">
-      <div style="padding: 20px">
+      <div class="pathfinder-form-wrap">
         <h2>Find your path:</h2>
 
         <div class="form-group">
-          <label style="color: #ffffff">Start location:</label>
-          <select v-model="startNode">
-            <option value="">-- Select start location --</option>
-            <option
-              v-for="n in nodes"
-              :key="n.node_id"
-              :value="String(n.node_id)"
-            >
-              {{ n.node_name }} ({{ n.node_id }})
-            </option>
-          </select>
+          <label style="color: #ffffff;">Start location:</label>
+          <input
+            v-model="startInput"
+            list="start-location-list"
+            placeholder="Type start location"
+          />
+          <datalist id="start-location-list">
+            <option v-for="n in nodes" :key="`start-${n.node_id}`" :value="locationLabel(n)" />
+          </datalist>
         </div>
 
         <div class="form-group">
-          <label style="color: #ffffff">Target destination:</label>
-          <select v-model="targetNode">
-            <option value="">-- Select target destination --</option>
-            <option
-              v-for="n in nodes"
-              :key="n.node_id"
-              :value="String(n.node_id)"
-            >
-              {{ n.node_name }} ({{ n.node_id }})
-            </option>
-          </select>
+          <label style="color: #ffffff;">Target destination:</label>
+          <input
+            v-model="targetInput"
+            list="target-location-list"
+            placeholder="Type target destination"
+          />
+          <datalist id="target-location-list">
+            <option v-for="n in nodes" :key="`target-${n.node_id}`" :value="locationLabel(n)" />
+          </datalist>
         </div>
 
         <div class="IndexCheckbox-group">
@@ -124,11 +154,6 @@ export default {
           <span
             role="button"
             @click="watchPath"
-            style="
-              cursor: pointer;
-              color: var(--nuxt-link-color, blue);
-              text-decoration: underline;
-            "
           >
             {{ shortestPath.join(" -> ") }}
           </span>
