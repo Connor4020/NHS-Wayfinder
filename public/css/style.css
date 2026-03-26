@@ -136,14 +136,6 @@ article hr {
   margin-bottom: 15px;
 }
 
-.form-group select {
-    padding: 5px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #3b3b3b;
-}
 
 label {
   font-weight: 600;
