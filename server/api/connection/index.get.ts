@@ -9,13 +9,16 @@ export default defineEventHandler(async (event) => {
     if (!wantsPaging) {
       const [rows] = await pool.query(
         `SELECT c.node_1, c.node_2, c.wheelchair_accessible,
-                cm.media_id, mr.media_type, mr.media_url, cm.order_num, cm.content_desc
+                cm.media_id, mr.media_type, mr.media_url, mr.media_name, cm.order_num, cm.content_desc,
+                n1.node_name AS node_1_name, n2.node_name AS node_2_name
          FROM connections c
          LEFT JOIN connection_media cm
            ON cm.connection_node_1 = c.node_1 AND cm.connection_node_2 = c.node_2
          LEFT JOIN media_resource mr
            ON mr.media_id = cm.media_id
-         ORDER BY c.node_1, c.node_2, cm.order_num ASC`
+         LEFT JOIN node n1 ON n1.node_id = c.node_1
+         LEFT JOIN node n2 ON n2.node_id = c.node_2
+         ORDER BY n1.node_name, n2.node_name, COALESCE(mr.media_name, mr.media_url) ASC`
       )
 
       const map = new Map()
@@ -46,7 +49,12 @@ export default defineEventHandler(async (event) => {
     const total = Number((countRows as any[])[0]?.total || 0)
 
     const [pagedConnections] = await pool.query(
-      'SELECT node_1, node_2, wheelchair_accessible FROM connections ORDER BY node_1, node_2 LIMIT ? OFFSET ?',
+      `SELECT c.node_1, c.node_2, c.wheelchair_accessible
+       FROM connections c
+       LEFT JOIN node n1 ON n1.node_id = c.node_1
+       LEFT JOIN node n2 ON n2.node_id = c.node_2
+       ORDER BY n1.node_name, n2.node_name
+       LIMIT ? OFFSET ?`,
       [limit, offset]
     )
 
@@ -71,11 +79,11 @@ export default defineEventHandler(async (event) => {
 
       const [mediaRows] = await pool.query(
         `SELECT cm.connection_node_1 AS node_1, cm.connection_node_2 AS node_2,
-                cm.media_id, mr.media_type, mr.media_url, cm.order_num, cm.content_desc
+                cm.media_id, mr.media_type, mr.media_url, mr.media_name, cm.order_num, cm.content_desc
          FROM connection_media cm
          LEFT JOIN media_resource mr ON mr.media_id = cm.media_id
          WHERE ${whereClause}
-         ORDER BY cm.connection_node_1, cm.connection_node_2, cm.order_num ASC`,
+         ORDER BY cm.connection_node_1, cm.connection_node_2, COALESCE(mr.media_name, mr.media_url) ASC`,
         params
       )
 

@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     const wantsPaging = query.limit !== undefined || query.offset !== undefined
 
     if (!wantsPaging) {
-      const [rows] = await pool.query('SELECT * FROM media_resource')
+      const [rows] = await pool.query('SELECT * FROM media_resource ORDER BY COALESCE(media_name, media_url) ASC')
       return rows
     }
 
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     const total = Number((countRows as any[])[0]?.total || 0)
 
     const [rows] = await pool.query(
-      'SELECT * FROM media_resource ORDER BY media_id LIMIT ? OFFSET ?',
+      'SELECT * FROM media_resource ORDER BY COALESCE(media_name, media_url) ASC LIMIT ? OFFSET ?',
       [limit, offset]
     )
     return {
