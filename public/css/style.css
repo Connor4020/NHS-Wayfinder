@@ -309,7 +309,8 @@ input:focus {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   gap: 8px;
 }
 
@@ -317,8 +318,16 @@ input:focus {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 5px;
   color: #ffffff;
+}
+
+.IndexCheckbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .box-container-center .button {
@@ -799,6 +808,7 @@ main h2 {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
   gap: 8px;
 }
 
