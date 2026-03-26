@@ -246,8 +246,8 @@ const connectionsShowingCount = computed(() => filteredConnections.value.length)
         </div>
 
         <div class="checkbox-group">
-            <label>Wheelchair only<input type="checkbox" v-model="filterAccessible" /></label>
-            <label>Hide all connections<input type="checkbox" v-model="filterHideAll" /></label>
+            <label><input type="checkbox" v-model="filterAccessible" />Wheelchair only</label>
+            <label><input type="checkbox" v-model="filterHideAll" />Hide all connections</label>
             <button
                 @click="filterFrom = ''; filterTo = ''; filterAccessible = false; filterHideAll = false">Reset</button>
             <span>Showing {{ connectionsShowingCount }} / {{ connectionsTotal }} connections</span>
