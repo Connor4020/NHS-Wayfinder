@@ -128,15 +128,39 @@ const nextMedia = () => {
   if (currentIndex.value < mediaList.value.length - 1) currentIndex.value++;
 };
 
+const instructionTextEl = ref(null);
+
+const getPreferredSpeechLang = () => {
+  if (typeof document === "undefined") return "en-GB";
+
+  const translateSelect = document.querySelector(".goog-te-combo");
+  if (translateSelect && translateSelect.value) return String(translateSelect.value);
+
+  if (document.documentElement && document.documentElement.lang) {
+    return document.documentElement.lang;
+  }
+
+  return "en-GB";
+};
+
 const speakDescription = (text) => {
   if (typeof window === "undefined" || !window.speechSynthesis) return;
 
   window.speechSynthesis.cancel();
 
-  if (text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(utterance);
-  }
+  const domText = instructionTextEl.value
+    ? instructionTextEl.value.innerText || instructionTextEl.value.textContent
+    : "";
+
+  const spokenText =
+    (typeof text === "string" && text.trim()) ||
+    (typeof domText === "string" ? domText.trim() : "");
+
+  if (!spokenText) return;
+
+  const utterance = new SpeechSynthesisUtterance(spokenText);
+  utterance.lang = getPreferredSpeechLang();
+  window.speechSynthesis.speak(utterance);
 };
 
 onUnmounted(() => {
@@ -185,10 +209,10 @@ onUnmounted(() => {
                 </span>
                 <h4>Instructions:</h4>
                 <div v-if="currentMedia.content_desc" class="instruction-block">
-                  <em class="instruction-text">{{ currentMedia.content_desc }}</em>
+                  <em ref="instructionTextEl" class="instruction-text">{{ currentMedia.content_desc }}</em>
                   <button
-                    class="tts-button"
-                    @click="speakDescription(currentMedia.content_desc)"
+                    class="tts-button"  
+                    @click="speakDescription()"
                     title="Read description"
                   >
                     🔊 Read out the direction
@@ -265,10 +289,10 @@ onUnmounted(() => {
                 }})</small
               >
               <div v-if="currentMedia.content_desc" class="instruction-block">
-                <p class="instruction-text">{{ currentMedia.content_desc }}</p>
+                <p ref="instructionTextEl" class="instruction-text">{{ currentMedia.content_desc }}</p>
                 <button
                   class="tts-button"
-                  @click="speakDescription(currentMedia.content_desc)"
+                  @click="speakDescription()"
                   title="Read description"
                 >
                   🔊 Read out the direction
