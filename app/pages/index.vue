@@ -43,7 +43,7 @@ export default {
 
   methods: {
     locationLabel(node) {
-      return '${node.node_name} (${node.node_id})';
+      return `${node.node_name} (${node.node_id})`;
     },
     resolveNodeId(rawValue) {
       const normalized = String(rawValue || "").trim().toLowerCase();
@@ -126,7 +126,7 @@ export default {
             placeholder="Type start location"
           />
           <datalist id="start-location-list">
-            <option v-for="n in nodes" :key="'start-${n.node_id}'" :value="locationLabel(n)" />
+            <option v-for="n in nodes" :key="`start-${n.node_id}`" :value="locationLabel(n)" />
           </datalist>
         </div>
 
@@ -138,7 +138,7 @@ export default {
             placeholder="Type target destination"
           />
           <datalist id="target-location-list">
-            <option v-for="n in nodes" :key="'target-${n.node_id}'" :value="locationLabel(n)" />
+            <option v-for="n in nodes" :key="`target-${n.node_id}`" :value="locationLabel(n)" />
           </datalist>
         </div>
 
